@@ -53,7 +53,7 @@ Please read [CONTRIBUTING.md](https://google.com) for details on our code of con
 * **Faran Azadi** - *Team member* - [FaranAz96](https://github.com/FaranAz96)
 * **Hamza Asif** - *Team member* - [Repjaws](https://github.com/Repjaws)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Air92/Project-CAD/contributors) who participated in this project.
 
 ## License
 
