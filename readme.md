@@ -1,26 +1,66 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Air92}
-TODO: Write a project description
+# Project D Polluted - Air92
 
-Important files:
-effort_committment.xlsx
-location: ./docs/budget/effort_committment.xlsx  
+One Paragraph of project description goes here
 
-description: a spreadsheet file you can fill in. Add the hours you think your team will be able to give to the project. See the ammount of total effort you can bring to the project. Use this to help you estimate what can be achieved.
-## Installation
-TODO: Describe the installation process
-## Usage
-TODO: Write usage instructions
-## History
-TODO: Write history
-## Credits
-TODO: Abd-Assamad Achouri, Yusof Bandar, Evans Mensah Adeenu, Naim Ahmed, Faran Azadi & Hamza Asif 
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your Raspberry Pi, phone and backend for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install, the hardware you need to configure and how to install them.
+
+```
+Give examples
+```
+
+### Installing
+
+A step by step series of examples that tell you have to get a development env running
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Android Studio](https://developer.android.com/studio/install.html) - The IDE used to develop the app
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://google.com) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Authors
+
+* **Abd-Assamad Achouri** - *Project manager* - [Achouri12](https://github.com/Achouri12)
+* **Yusof Bandar** - *Technical lead* - [YusofBandar](https://github.com/YusofBandar)
+* **Evans Mensah Adeenu** - *Team member* - [emAdeenu](https://github.com/emAdeenu)
+* **Naim Ahmed** - *Team member* - [NaimAhmed](https://github.com/NaimAhmed)
+* **Faran Azadi** - *Team member* - [FaranAz96](https://github.com/FaranAz96)
+* **Hamza Asif** - *Team member* - [Repjaws](https://github.com/Repjaws)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
 ## License
-TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
 
+This project is licensed under the XYZ License - see the [LICENSE.md](LICENSE.md) file for details
 
+## Acknowledgments
 
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
