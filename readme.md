@@ -1,4 +1,4 @@
-# Project D Polluted - Air92
+# Project D: Polluted - Air92
 
 One Paragraph of project description goes here
 
@@ -61,6 +61,7 @@ This project is licensed under the XYZ License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
+* Credits to anyone who helped
+* Anyone whose code was used
 * Inspiration
 * etc
