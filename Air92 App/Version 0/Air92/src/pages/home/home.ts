@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  test(){
+    console.log("hit");
+  }
+
 }
