@@ -1,0 +1,8 @@
+{
+  "name": "Air92",
+  "app_id": "c606d6c3",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
