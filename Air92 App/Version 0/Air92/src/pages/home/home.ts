@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { LocationPage } from '../location/location';
 
 @Component({
   selector: 'page-home',
@@ -13,6 +14,7 @@ export class HomePage {
 
   test(){
     console.log("hit");
+    this.navCtrl.push('LocationPage');
   }
 
 }
