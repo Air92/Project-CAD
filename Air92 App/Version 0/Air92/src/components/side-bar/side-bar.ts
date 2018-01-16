@@ -15,7 +15,7 @@ import { NavController } from 'ionic-angular';
 })
 export class SideBarComponent {
 
-  Pages : string[] = ["Page1","Page2","Page3","Page4"];
+  Pages : string[] = ["Page1","Page2"];
   state : string = 'start';
   Visi : boolean = false;
   @ViewChild("sideBar") sideBar: ElementRef;
