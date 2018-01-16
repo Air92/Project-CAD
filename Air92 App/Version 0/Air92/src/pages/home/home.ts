@@ -3,6 +3,7 @@ import { trigger,state,style,transition,animate,keyframes } from '@angular/anima
 import { NavController } from 'ionic-angular';
 
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
