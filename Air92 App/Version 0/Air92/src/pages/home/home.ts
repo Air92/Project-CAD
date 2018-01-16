@@ -9,12 +9,12 @@ import { LocationPage } from '../location/location';
 export class HomePage {
 
   constructor(public navCtrl: NavController) {
-
+  
   }
 
   test(){
     console.log("hit");
-    this.navCtrl.push('LocationPage');
+    this.navCtrl.push(LocationPage)
   }
 
 }

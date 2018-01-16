@@ -15,31 +15,20 @@
 
 <ion-content padding>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button block (click)="onLocateUser()" color="danger">Get Location</button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <p>Your location is: </p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  
+  <ion-item>
+    <ion-label stacked>Start Location</ion-label>
+    <ion-input></ion-input>  
+    <button ion-button (click)="onLocateUser()" color="accent" item-right>Get Location</button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>End Location</ion-label>
+    <ion-input></ion-input>  
+  </ion-item>
+
+  <button ion-button color="primary" >Add</button>
 
 
-  <ion-card>
-
-    <ion-card-header>
-      Longitude - Latitude
-    </ion-card-header>
-
-    <ion-card-content>
-
-
-
-    </ion-card-content>
-
-  </ion-card>
+ 
 </ion-content>
