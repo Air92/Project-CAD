@@ -3,10 +3,10 @@ side-bar {
     #sideDiv{
         width: 100%;
         height: 110%;
-        position: fixed;
-        top:0px;
+        position: absolute;
         left:0px;
-        z-index: 300; 
+        top:0px;
+        
         
     }
 
@@ -14,7 +14,6 @@ side-bar {
         background-color: #53B4F5;
         width: 70%;
         height: 99%;
-    
         margin-left: -70%;
         transition: 60ms ease-out !important;
  

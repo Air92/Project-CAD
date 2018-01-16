@@ -1,4 +1,4 @@
-<div id="sideDiv" (swipe)="toggle()">
+<div id="sideDiv" #sideDiv (swipe)="toggle()">
   <ion-list no-lines id="sideBar" #sideBar >
       <ion-title id="title">Air 92</ion-title>
       <button ion-item *ngFor="let page of Pages" id="butnav"> {{page}} </button>
