@@ -1,7 +1,17 @@
 page-location {
     
-    #allPage{
-        //position: absolute !important;
+    #AddButton, #DeleteButton{
+        padding: 8%;
+        margin-top: 20%;
+       
+    }
+
+    #AddButton{
+        margin-left: 10%;
+    }
+
+    #DeleteButton{
+        margin-left: 20%;
     }
 
 
