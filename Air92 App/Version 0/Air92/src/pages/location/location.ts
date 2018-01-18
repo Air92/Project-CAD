@@ -33,6 +33,7 @@ constructor(public navCtrl: NavController, private geolocation: Geolocation) {
       .then((location) => {
         console.log('sucess');
         this.location = location;
+        
       })
       .catch((error) => {
       console.log('Error getting location', error);
