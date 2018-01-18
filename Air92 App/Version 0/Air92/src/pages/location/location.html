@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header>
 
   <ion-navbar>
@@ -17,20 +18,33 @@
 
   
   
+<ion-content scroll="false">
+
+    <ion-item>
+        <ion-label stacked>Journey Name</ion-label>
+        <ion-input></ion-input>  
+    </ion-item>
+
+ 
   <ion-item>
     <ion-label stacked>Start Location</ion-label>
-    <ion-input></ion-input>  
+    <ion-input (ionFocus)="initAutoComplete()" id="startSearch"></ion-input>  
     <button ion-button (click)="onLocateUser()" color="accent" item-right>Get Location</button>
   </ion-item>
 
   <ion-item>
     <ion-label stacked>End Location</ion-label>
-    <ion-input></ion-input>  
+    <ion-input (ionFocus)="initAutoComplete()" id="startSearch"></ion-input>  
   </ion-item>
 
-  <button ion-button color="primary" >Add</button>
+  
+
+  <button ion-button color="danger" id="DeleteButton" >Cancel</button>
+  <button ion-button color="positive" id="AddButton" >Add</button>
 
   <side-bar></side-bar>
 
  
+  <side-bar></side-bar>
 </ion-content>
+

@@ -2,4 +2,32 @@ page-location {
    #page{
        position: absolute;
    }
+    
+    #AddButton, #DeleteButton{
+        padding: 8%;
+        margin-top: 20%;
+       
+    }
+
+    #AddButton{
+        margin-left: 10%;
+    }
+
+    #DeleteButton{
+        margin-left: 20%;
+    }
+
+
+    
+
+    
+
+   
+
+    
+   
+}
+
+ion-header{
+    z-index: 1 !important;
 }

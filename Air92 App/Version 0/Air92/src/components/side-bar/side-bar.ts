@@ -15,10 +15,11 @@ import { NavController } from 'ionic-angular';
 })
 export class SideBarComponent {
 
-  Pages : string[] = ["Page1","Page2","Page3","Page4"];
+  Pages : string[] = ["Page1","Page2"];
   state : string = 'start';
   Visi : boolean = false;
   @ViewChild("sideBar") sideBar: ElementRef;
+  @ViewChild("sideDiv") sideDiv: ElementRef;
 
   constructor(public navCtrl: NavController, private renderer: Renderer) {
 
@@ -28,16 +29,20 @@ export class SideBarComponent {
   ngAfterViewInit(){
     
     this.renderer.setElementStyle(this.sideBar.nativeElement,'margin-left','-70%');
+    this.renderer.setElementStyle(this.sideDiv.nativeElement,'z-index','-10');
+    
 
   }
 
   toggle(){
     if(this.Visi == false){
       this.renderer.setElementStyle(this.sideBar.nativeElement,'margin-left','0%');
+      this.renderer.setElementStyle(this.sideDiv.nativeElement, 'z-index','300');
       this.Visi = true;
 
     }else{
       this.renderer.setElementStyle(this.sideBar.nativeElement,'margin-left','-70%');
+      this.renderer.setElementStyle(this.sideDiv.nativeElement, 'z-index','-10');
       this.Visi = false;
     }
 
