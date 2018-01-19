@@ -86,4 +86,6 @@
     </plugin>
     <plugin name="cordova-plugin-googlemaps" spec="^2.1.1" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.9.1" />
+    <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
+    <engine name="browser" spec="~5.0.3" />
 </widget>

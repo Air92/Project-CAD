@@ -8,6 +8,9 @@ import { HomePage } from '../pages/home/home';
 import {LocationPage} from '../pages/location/location';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { HTTP } from '@ionic-native/http';
+import { Toast } from '@ionic-native/toast';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,6 +43,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     StatusBar,
     SplashScreen,
     Geolocation,
+    HTTP,
+    Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
   

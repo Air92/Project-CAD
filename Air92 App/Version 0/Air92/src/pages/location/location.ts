@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { HTTP } from '@ionic-native/http';
+import { Toast } from '@ionic-native/toast';
 
 
 /**
@@ -32,7 +34,7 @@ export class LocationPage {
   };
 
 
-  constructor(public navCtrl: NavController, private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, private geolocation: Geolocation, private http: HTTP, private toast: Toast) {
   }
 
   //locate users getting lon and lan 
@@ -49,15 +51,15 @@ export class LocationPage {
 
   }
 
- 
+
   ngAfterViewInit() {
     //get input elements, get the first tag within the ion-input tag
     this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
     this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
 
-  
+
     this.onLocateUser();
-    
+
 
   }
 
@@ -86,14 +88,38 @@ export class LocationPage {
   }
 
   //cancel journey pop from nav stack
-  cancelJourney(){
+  cancelJourney() {
     console.log("hit");
     this.navCtrl.pop();
   }
 
   //add journey
-  addJourney(){
+  addJourney() {
+
+   
+   /* this.http.get('http://ionic.io', {}, {})
+      .then(data => {
+
+        console.log(data.status);
+        console.log(data.headers);
+
+      })
+      .catch(error => {
+
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
+
+      });*/
+
+      this.toast.show(`Journey Successfully Added`, '5000', 'top').subscribe(
+        toast => {
+          console.log(toast);
+        }
+      );
     
+
+
 
   }
 
