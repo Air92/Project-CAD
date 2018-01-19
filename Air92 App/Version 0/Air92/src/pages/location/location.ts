@@ -54,6 +54,8 @@ constructor(public navCtrl: NavController, private geolocation: Geolocation) {
   
   }
 
+  
+
  
  
 

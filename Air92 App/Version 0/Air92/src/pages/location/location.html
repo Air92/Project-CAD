@@ -14,13 +14,10 @@
 </ion-header>
 
 
-<ion-content id="page">
-
-  
-  
 <ion-content scroll="false">
 
-    <ion-item>
+  <div (swipe)="sideBar.toggle()">
+    <ion-item >
         <ion-label stacked>Journey Name</ion-label>
         <ion-input></ion-input>  
     </ion-item>
@@ -38,14 +35,14 @@
   </ion-item>
 
   
-  <button ion-button color="secondary" id="hi" >Cancel</button>
 
   <button ion-button color="danger" id="DeleteButton" >Cancel</button>
   <button ion-button color="positive" id="AddButton" >Add</button>
-
-  <side-bar></side-bar>
+  <side-bar #sideBar></side-bar>
+</div>
+  
 
  
-  <side-bar></side-bar>
+  
 </ion-content>
 
