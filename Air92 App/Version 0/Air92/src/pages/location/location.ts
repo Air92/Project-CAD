@@ -11,7 +11,7 @@ import { Geolocation } from '@ionic-native/geolocation';
  */
 
 
- declare var google;
+declare var google;
 
 
 
@@ -21,57 +21,81 @@ import { Geolocation } from '@ionic-native/geolocation';
   templateUrl: 'location.html',
 })
 export class LocationPage {
-location : any;
-placeSearch : any;
-startSearch : any;
+  //store user location
+  location: any;
+  //var for google maps autocomplete
+  autoComplete: any;
+  //object for start and end location for journey
+  searches: any = {
+    startSearch: null,
+    endSearch: null
+  };
 
-constructor(public navCtrl: NavController, private geolocation: Geolocation) {
+
+  constructor(public navCtrl: NavController, private geolocation: Geolocation) {
   }
 
-  onLocateUser(){
+  //locate users getting lon and lan 
+  onLocateUser() {
     this.geolocation.getCurrentPosition()
       .then((location) => {
         console.log('sucess');
         this.location = location;
-        
+
       })
       .catch((error) => {
-      console.log('Error getting location', error);
-    });
+        console.log('Error getting location', error);
+      });
 
   }
 
-  placesSearchInput : any;
+ 
   ngAfterViewInit() {
-      this.placesSearchInput =  document.getElementById("startSearch").getElementsByTagName('input')[0];
-      
-    }
+    //get input elements, get the first tag within the ion-input tag
+    this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
+    this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+
   
-    initAutoComplete(){
-      console.log("hit");
-      console.log(this.placesSearchInput);
-      this.startSearch = new google.maps.places.Autocomplete((this.placesSearchInput));
-  
+    this.onLocateUser();
+    
+
   }
 
-  
+  //show autocomplete searches, passes the id of search input
+  initAutoComplete(search: String) {
+    if (search == 'startSearch') {
+      this.autoComplete = new google.maps.places.Autocomplete((this.searches.startSearch));
+    }
+    else if (search == 'endSearch') {
+      this.autoComplete = new google.maps.places.Autocomplete((this.searches.endSearch));
+    }
 
- 
- 
+  }
 
-   // This example displays an address form, using the autocomplete feature
-      // of the Google Places API to help users fill in the information.
+  //set the autocomplete to search near users location
+  geolocate() {
+    var geolocation = {
+      lat: this.location.coords.latitude,
+      lng: this.location.coords.longitude
+    };
+    var circle = new google.maps.Circle({
+      center: geolocation,
+      radius: this.location.coords.accuracy
+    });
+    this.autoComplete.setBounds(circle.getBounds());
+  }
 
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+  //cancel journey pop from nav stack
+  cancelJourney(){
+    console.log("hit");
+    this.navCtrl.pop();
+  }
 
-       
+  //add journey
+  addJourney(){
+    
 
-
-
-      
-
+  }
 
 
 }

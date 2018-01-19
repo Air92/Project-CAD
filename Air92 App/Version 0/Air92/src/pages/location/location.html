@@ -4,18 +4,9 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<ion-content>
 
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>location</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content scroll="false">
-
+  <side-bar #sideBar></side-bar>
   <div (swipe)="sideBar.toggle()">
     <ion-item >
         <ion-label stacked>Journey Name</ion-label>
@@ -25,20 +16,20 @@
  
   <ion-item>
     <ion-label stacked>Start Location</ion-label>
-    <ion-input (ionFocus)="initAutoComplete()" id="startSearch"></ion-input>  
+    <ion-input (ionFocus)="initAutoComplete('startSearch')" id="startSearch"></ion-input>  
     <button ion-button (click)="onLocateUser()" color="accent" item-right>Get Location</button>
   </ion-item>
 
   <ion-item>
     <ion-label stacked>End Location</ion-label>
-    <ion-input (ionFocus)="initAutoComplete()" id="startSearch"></ion-input>  
+    <ion-input (ionFocus)="initAutoComplete('endSearch')" id="endSearch"></ion-input>  
   </ion-item>
 
   
 
-  <button ion-button color="danger" id="DeleteButton" >Cancel</button>
-  <button ion-button color="positive" id="AddButton" >Add</button>
-  <side-bar #sideBar></side-bar>
+  <button ion-button color="danger" id="DeleteButton" (click)="cancelJourney()">Cancel</button>
+  <button ion-button color="positive" id="AddButton" (click)="addJourney()" >Add</button>
+ 
 </div>
   
 

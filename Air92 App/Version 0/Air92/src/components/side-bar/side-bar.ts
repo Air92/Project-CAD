@@ -19,8 +19,7 @@ export class SideBarComponent {
   state : string = 'start';
   Visi : boolean = false;
   SideBar : any;
-  @ViewChild("sideBar") sideBar: ElementRef;
-
+  
 
   constructor(public navCtrl: NavController, private renderer: Renderer) {
 
@@ -29,23 +28,26 @@ export class SideBarComponent {
 
   ngAfterViewInit(){
     
-    this.renderer.setElementStyle(this.sideBar.nativeElement,'margin-left','-70%');
+    
     this.SideBar = document.getElementById("sideBar");
-    this.SideBar.style.marginLeft = ""
+    this.SideBar.style.visibility = "hidden";
+    this.SideBar.style.marginLeft = "-70%";
     
 
   }
 
   toggle(){
-    console.log("hit");
-    if(this.Visi == false){
-      this.renderer.setElementStyle(this.sideBar.nativeElement,'margin-left','0%');
-      this.Visi = true;
+    if(this.SideBar.style.visibility == "hidden"){
+      this.SideBar.style.visibility = "visible";
+      this.SideBar.style.marginLeft = "0%";
+      
 
     }else{
-      this.renderer.setElementStyle(this.sideBar.nativeElement,'margin-left','-70%');
-      this.Visi = false;
+      this.SideBar.style.visibility = "hidden";
+      this.SideBar.style.marginLeft = "-70%";
     }
+
+    console.log(this.SideBar.style.visibility);
 
   }
     
