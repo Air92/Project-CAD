@@ -14,6 +14,7 @@ import {
   Toast
 } from '@ionic-native/toast';
 
+import {JourneyInitiationPage} from '../journey-initiation/journey-initiation';
 /**
  * Generated class for the LocationPage page.
  *
@@ -195,7 +196,7 @@ export class LocationPage {
   //add journey
   addJourney(): void {
 
-    this.addRoute();
+    this.navCtrl.push(JourneyInitiationPage);
 
 
     /* this.http.get('http://ionic.io', {}, {})
