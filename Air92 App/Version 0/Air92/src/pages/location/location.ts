@@ -23,8 +23,7 @@ import {
  */
 
 
-declare
-var google;
+declare var google;
 
 
 
