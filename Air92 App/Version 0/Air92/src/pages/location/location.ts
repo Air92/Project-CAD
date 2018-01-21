@@ -14,7 +14,6 @@ import {
   Toast
 } from '@ionic-native/toast';
 
-
 /**
  * Generated class for the LocationPage page.
  *
