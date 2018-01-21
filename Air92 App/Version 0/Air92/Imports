@@ -1,0 +1,14 @@
+HTTP Import:
+    url: https://ionicframework.com/docs/native/http/
+    Install: {
+        $ ionic cordova plugin add cordova-plugin-advanced-http
+        $ npm install --save @ionic-native/http
+    }
+
+Toast Import:
+    url: https://ionicframework.com/docs/native/toast/
+    Install: {
+        $ ionic cordova plugin add cordova-plugin-x-toast
+        $ npm install --save @ionic-native/toast
+    }
+
