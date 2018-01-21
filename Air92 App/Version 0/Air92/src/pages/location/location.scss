@@ -1,6 +1,8 @@
 page-location {
    #page{
-       position: absolute;
+       width:100%;
+       height: 68%;
+    
    }
     
     #AddButton, #DeleteButton{
@@ -17,13 +19,19 @@ page-location {
         margin-left: 20%;
     }
     
+    #map{
+        height:30%;
+        background-color: #53B4F5;
+        margin: 2%;
+        
+    }
     
-}
-
-ion-header{
-    z-index: 1 !important;
 }
 
 .pac-item-query{
     color: #53B4F5;
+}
+
+.scroll-content{
+    padding-bottom: 0px !important;
 }
