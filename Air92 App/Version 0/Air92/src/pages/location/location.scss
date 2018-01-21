@@ -1,37 +1,30 @@
 page-location {
-   #page{
-       width:100%;
-       height: 68%;
-    
-   }
-    
-    #AddButton, #DeleteButton{
-        padding: 8%;
-        margin-top: 20%;
-       
-    }
-
-    #AddButton{
-        margin-left: 10%;
-    }
-
-    #DeleteButton{
-        margin-left: 20%;
-    }
-    
-    #map{
-        height:30%;
-        background-color: #53B4F5;
-        margin: 2%;
-        
-    }
-    
+  #page {
+    width: 100%;
+    height: 68%;
+  }
+  #AddButton,
+  #DeleteButton {
+    padding: 8%;
+    margin-top: 20%;
+  }
+  #AddButton {
+    margin-left: 10%;
+  }
+  #DeleteButton {
+    margin-left: 20%;
+  }
+  #map {
+    height: 30%;
+    background-color: #53B4F5;
+    margin: 2%;
+  }
 }
 
-.pac-item-query{
-    color: #53B4F5;
+.pac-item-query {
+  color: #53B4F5;
 }
 
-.scroll-content{
-    padding-bottom: 0px !important;
+.scroll-content {
+  padding-bottom: 0px !important;
 }

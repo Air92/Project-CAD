@@ -1,8 +1,18 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
-import { HTTP } from '@ionic-native/http';
-import { Toast } from '@ionic-native/toast';
+import {
+  Component
+} from '@angular/core';
+import {
+  NavController
+} from 'ionic-angular';
+import {
+  Geolocation
+} from '@ionic-native/geolocation';
+import {
+  HTTP
+} from '@ionic-native/http';
+import {
+  Toast
+} from '@ionic-native/toast';
 
 
 /**
@@ -13,7 +23,8 @@ import { Toast } from '@ionic-native/toast';
  */
 
 
-declare var google;
+declare
+var google;
 
 
 
@@ -74,8 +85,7 @@ export class LocationPage {
           },
           clickable: false,
           draggable: false
-        }
-        )
+        })
 
 
 
@@ -138,7 +148,10 @@ export class LocationPage {
   private mapCreation(): void {
 
     this.map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: this.coord.lat, lng: this.coord.long },
+      center: {
+        lat: this.coord.lat,
+        lng: this.coord.long
+      },
       zoom: 15,
       draggable: true,
       fullscreenControl: false
@@ -154,13 +167,10 @@ export class LocationPage {
   //show autocomplete searches, passes the id of search input
   initAutoComplete(search: String): void {
 
-
-
     if (search == 'startSearch') {
       this.autoComplete = new google.maps.places.Autocomplete((this.searches.startSearch));
 
-    }
-    else if (search == 'endSearch') {
+    } else if (search == 'endSearch') {
       this.autoComplete = new google.maps.places.Autocomplete((this.searches.endSearch));
     }
 
