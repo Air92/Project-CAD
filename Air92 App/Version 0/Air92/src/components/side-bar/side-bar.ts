@@ -16,8 +16,6 @@ import { NavController } from 'ionic-angular';
 export class SideBarComponent {
 
   Pages : string[] = ["Page1","Page2"];
-  state : string = 'start';
-  Visi : boolean = false;
   SideBar : any;
   
 
@@ -41,13 +39,14 @@ export class SideBarComponent {
       this.SideBar.style.visibility = "visible";
       this.SideBar.style.marginLeft = "0%";
       
+      
 
     }else{
       this.SideBar.style.visibility = "hidden";
       this.SideBar.style.marginLeft = "-70%";
     }
 
-    console.log(this.SideBar.style.visibility);
+   
 
   }
     
