@@ -14,7 +14,9 @@ import {
   Toast
 } from '@ionic-native/toast';
 
-import {JourneyInitiationPage} from '../journey-initiation/journey-initiation';
+import {
+  JourneyInitiationPage
+} from '../journey-initiation/journey-initiation';
 /**
  * Generated class for the LocationPage page.
  *
@@ -44,6 +46,11 @@ export class LocationPage {
   //marker on map
   marker: any;
 
+  buttons : any = {
+    addButton: null,
+    deleteButton: null 
+  }
+
 
 
 
@@ -58,7 +65,7 @@ export class LocationPage {
 
   constructor(public navCtrl: NavController, private geolocation: Geolocation, private http: HTTP, private toast: Toast) {
 
-    this.onLocateUser();
+   
 
   }
 
@@ -102,10 +109,15 @@ export class LocationPage {
     //get input elements, get the first tag within the ion-input tag
     this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
     this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+    this.buttons.addButton = document.getElementById("addButton");
 
+   
+    this.onLocateUser();
+    this.initAutoComplete();
 
+    
 
-
+    
 
   }
 
@@ -116,151 +128,123 @@ export class LocationPage {
       map: this.map
     })
 
-    var startID;
-    var endID;
+    //call function twice
+    var startAddress = this.placeDecode1(this.searches.startSearch);
+    var endAddress = this.placeDecode1(this.searches.endSearch);
+  
+    
 
+    //promise all
+    Promise.all([endAddress,startAddress]).then(values =>{
 
-    this.PlaceID(function(result){
-      startID = result.start;
-      endID = result.end;
+      this.renderRoute(route,render,values[1],values[0]);
     })
-
-   this.renderRoute(route,render,startID,endID);
-
-
    
 
-  
-
-
+   
   }
 
-  private PlaceID(callback){
-
-    var placeID = {
-      start: "",
-      end: ""
-    }
-    this.geoLoc(this.searches.startSearch.value,function(result){
-      placeID.start = result;
-    })
- 
-    this.geoLoc(this.searches.endSearch.value,function(result){
-     placeID.end = result;
-   })
-
-   callback(placeID);
 
 
 
-  }
 
-  
+  //method convertes input into formatted address
+  private placeDecode1(input: HTMLInputElement) {
 
-  private geoLoc(location : any, callback){
-    
-    var geoCode = new google.maps.Geocoder();
-      
+    var result = new Promise(function(resolve, reject) {
+      var location = input.value;
 
+      var geoCode = new google.maps.Geocoder();
       geoCode.geocode({
         address: location
-      }, function (result, status) {
-        if (status === 'OK') {
-          console.log(result);
-          callback(result[0].place_id);
+      }, function(result,status){
+        if(status == 'OK'){
+          console.log(result[0].formatted_address);
+          resolve(result[0].formatted_address);
+        }
+      })
+    });
 
-        }
-        else{
-          callback("error");
-        }
-      });
+    return result;
+
+  }
+
+  
+
+
+
+
+
+
+
+  private renderRoute(route: any, render: any, start: any, end: any): void {
+    console.log("hit");
+    route.route(({
+      destination: end,
+      origin: start,
+      travelMode: 'WALKING'
+    }), function (response, status) {
+      console.log(status);
+      if (status === 'OK') {
+
+        render.setDirections(response);
+      }
+    });
+
+  }
+
+
+
+
+
+  private mapCreation(): void {
+
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: this.coord.lat,
+        lng: this.coord.long
+      },
+      zoom: 15,
+      draggable: true,
+      fullscreenControl: false
+    });
+  }
+
+
+
+  //show autocomplete searches, passes the id of search input
+  initAutoComplete(): void {
+    this.autoComplete = new google.maps.places.Autocomplete((this.searches.startSearch));
+    this.autoComplete = new google.maps.places.Autocomplete((this.searches.endSearch));
+  }
+
+  FocusAutoComplete(){
+
+
+    this.addButtonCheck();
 
 
   }
 
- 
-
-
-private renderRoute(route: any, render: any, start: String, end : String): void {
-  console.log("hit");
-  route.route(({
-    destination: end,
-    origin: start,
-    travelMode: 'WALKING'
-  }), function (response, status) {
-    console.log(status);
-    if (status === 'OK') {
+  addButtonCheck(){
+    if(this.searches.startSearch != '' && this.searches.endSearch != ''){
       
-      render.setDirections(response);
     }
-  });
-
-}
-
-
-
-
-
-private mapCreation(): void {
-
-  this.map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: this.coord.lat,
-      lng: this.coord.long
-    },
-    zoom: 15,
-    draggable: true,
-    fullscreenControl: false
-  });
-
-
-
-
-}
-
-
-
-//show autocomplete searches, passes the id of search input
-initAutoComplete(search: String): void {
-
-  var options = {
-    type: ['address']
-  };
-
-  if (search == 'startSearch') {
-    this.autoComplete = new google.maps.places.Autocomplete((this.searches.startSearch),options);
-
-  } else if (search == 'endSearch') {
-    this.autoComplete = new google.maps.places.Autocomplete((this.searches.endSearch),options);
   }
 
-  this.geolocate();
-  console.log(this.coord.long);
 
-}
+  //cancel journey pop from nav stack
+  cancelJourney(): void {
+    this.navCtrl.pop();
+  }
 
-//set the autocomplete to search near users location
-private geolocate(): void {
+  //add journey
+  addJourney(): void {
 
-  var circle = new google.maps.Circle({
-    center: (new google.maps.LatLng(this.coord.lat, this.coord.lon)),
-    radius: 10
-  });
-  this.autoComplete.setBounds(circle.getBounds());
-}
-
-//cancel journey pop from nav stack
-cancelJourney(): void {
-  this.navCtrl.pop();
-}
-
-//add journey
-addJourney(): void {
-
-  this.addRoute();
+    this.addRoute();
 
 
-  /* this.http.get('http://ionic.io', {}, {})
+    /* this.http.get('http://ionic.io', {}, {})
        .then(data => {
  
          console.log(data.status);
@@ -275,16 +259,16 @@ addJourney(): void {
  
        });*/
 
-  /* this.toast.show(`Journey Successfully Added`, '5000', 'top').subscribe(
-     toast => {
-       console.log(toast);
-     }
-   );*/
+    /* this.toast.show(`Journey Successfully Added`, '5000', 'top').subscribe(
+       toast => {
+         console.log(toast);
+       }
+     );*/
 
 
 
 
-}
+  }
 
 
 }

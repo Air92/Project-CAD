@@ -10,14 +10,6 @@
   <div id="map"></div>
 
   <div (swipe)="sideBar.toggle()" id="page">
-
-
-
-
-
-
-
-
     <ion-item>
       <ion-label stacked>Journey Name</ion-label>
       <ion-input></ion-input>
@@ -26,13 +18,13 @@
 
     <ion-item>
       <ion-label stacked>Start Location</ion-label>
-      <ion-input (ionFocus)="initAutoComplete('startSearch')" id="startSearch"></ion-input>
+      <ion-input (ionFocus)="FocusAutoComplete()" id="startSearch"></ion-input>
       <button ion-button (click)="onLocateUser()" color="accent" item-right>Get Location</button>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>End Location</ion-label>
-      <ion-input (ionFocus)="initAutoComplete('endSearch')" id="endSearch"></ion-input>
+      <ion-input (ionFocus)="FocusAutoComplete()" id="endSearch"></ion-input>
     </ion-item>
 
 
