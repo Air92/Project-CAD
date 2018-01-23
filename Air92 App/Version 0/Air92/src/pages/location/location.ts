@@ -14,7 +14,7 @@ import {
   Toast
 } from '@ionic-native/toast';
 
-
+import {JourneyInitiationPage} from '../journey-initiation/journey-initiation';
 /**
  * Generated class for the LocationPage page.
  *

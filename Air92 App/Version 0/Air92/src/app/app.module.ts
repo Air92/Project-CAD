@@ -6,10 +6,19 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {LocationPage} from '../pages/location/location';
+import {JourneyInitiationPage} from '../pages/journey-initiation/journey-initiation';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
+/**
+ * ionic cordova plugin add cordova-plugin-advanced-http
+ * npm install --save @ionic-native/http
+ */
 import { Toast } from '@ionic-native/toast';
+/**
+ * ionic cordova plugin add cordova-plugin-x-toast
+ * npm install --save @ionic-native/toast
+ */
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,8 +33,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     MyApp,
     HomePage,
     LocationPage,
-    SideBarComponent
-
+    SideBarComponent,
+    JourneyInitiationPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
   entryComponents: [
     MyApp,
     HomePage,
-    LocationPage
+    LocationPage,
+    JourneyInitiationPage
   ],
   providers: [
     StatusBar,

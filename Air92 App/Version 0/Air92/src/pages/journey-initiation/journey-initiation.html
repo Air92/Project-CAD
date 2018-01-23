@@ -1,0 +1,30 @@
+<!--
+  Generated template for the JourneyInitiationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>JourneyInitiation</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+
+    <h1>Start Your Journey</h1>
+    <div> #map id="map"</div>
+    <ion-card te id="Results">
+        <ion-card-header>
+          Latest Reading
+        </ion-card-header>
+        <ion-card-content>
+          CO2:          Gas:          Air Humidity:         Wind:         Temp:
+        </ion-card-content>
+      </ion-card>
+
+ <button ion-button color="positive" id="StartButton" (click)="startJourney()">Start</button>
+
+ <button ion-button color="positive" id="PauseButton" (click)="pauseJourney()">Pause</button>
+</ion-content>
