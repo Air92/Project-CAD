@@ -195,7 +195,7 @@ export class LocationPage {
 
   //add journey
   addJourney(): void {
-
+    this.addRoute();
     this.navCtrl.push(JourneyInitiationPage);
 
 
