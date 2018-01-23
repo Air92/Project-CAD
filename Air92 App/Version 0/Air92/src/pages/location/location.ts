@@ -116,90 +116,151 @@ export class LocationPage {
       map: this.map
     })
 
-    this.renderRoute(route, render);
-
-  }
-
-  private renderRoute(route: any, render: any): void {
+    var startID;
+    var endID;
 
 
-    route.route(({
-      destination: 'Sydney, NSW',
-      origin: 'Perth, WA',
-      travelMode: 'DRIVING'
-    }), function (response, status) {
-      if (status = 'OK') {
+    this.PlaceID(function(result){
+      startID = result.start;
+      endID = result.end;
+    })
+
+   this.renderRoute(route,render,startID,endID);
 
 
+   
 
-        render.setDirections(response);
-
-
-      }
-    });
-
-  }
-
-
-
-
-
-  private mapCreation(): void {
-
-    this.map = new google.maps.Map(document.getElementById('map'), {
-      center: {
-        lat: this.coord.lat,
-        lng: this.coord.long
-      },
-      zoom: 15,
-      draggable: true,
-      fullscreenControl: false
-    });
-
-
+  
 
 
   }
 
+  private PlaceID(callback){
 
-
-  //show autocomplete searches, passes the id of search input
-  initAutoComplete(search: String): void {
-
-    if (search == 'startSearch') {
-      this.autoComplete = new google.maps.places.Autocomplete((this.searches.startSearch));
-
-    } else if (search == 'endSearch') {
-      this.autoComplete = new google.maps.places.Autocomplete((this.searches.endSearch));
+    var placeID = {
+      start: "",
+      end: ""
     }
+    this.geoLoc(this.searches.startSearch.value,function(result){
+      placeID.start = result;
+    })
+ 
+    this.geoLoc(this.searches.endSearch.value,function(result){
+     placeID.end = result;
+   })
 
-    this.geolocate();
-    console.log(this.coord.long);
+   callback(placeID);
+
+
 
   }
 
-  //set the autocomplete to search near users location
-  private geolocate(): void {
+  
 
-    var circle = new google.maps.Circle({
-      center: (new google.maps.LatLng(this.coord.lat, this.coord.lon)),
-      radius: 10
-    });
-    this.autoComplete.setBounds(circle.getBounds());
+  private geoLoc(location : any, callback){
+    
+    var geoCode = new google.maps.Geocoder();
+      
+
+      geoCode.geocode({
+        address: location
+      }, function (result, status) {
+        if (status === 'OK') {
+          console.log(result);
+          callback(result[0].place_id);
+
+        }
+        else{
+          callback("error");
+        }
+      });
+
+
   }
 
-  //cancel journey pop from nav stack
-  cancelJourney(): void {
-    this.navCtrl.pop();
+ 
+
+
+private renderRoute(route: any, render: any, start: String, end : String): void {
+  console.log("hit");
+  route.route(({
+    destination: end,
+    origin: start,
+    travelMode: 'WALKING'
+  }), function (response, status) {
+    console.log(status);
+    if (status === 'OK') {
+      
+      render.setDirections(response);
+    }
+  });
+
+}
+
+
+
+
+
+private mapCreation(): void {
+
+  this.map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: this.coord.lat,
+      lng: this.coord.long
+    },
+    zoom: 15,
+    draggable: true,
+    fullscreenControl: false
+  });
+
+
+
+
+}
+
+
+
+//show autocomplete searches, passes the id of search input
+initAutoComplete(search: String): void {
+
+  var options = {
+    type: ['address']
+  };
+
+  if (search == 'startSearch') {
+    this.autoComplete = new google.maps.places.Autocomplete((this.searches.startSearch),options);
+
+  } else if (search == 'endSearch') {
+    this.autoComplete = new google.maps.places.Autocomplete((this.searches.endSearch),options);
   }
 
-  //add journey
-  addJourney(): void {
+  this.geolocate();
+  console.log(this.coord.long);
 
-    this.addRoute();
+}
+
+//set the autocomplete to search near users location
+private geolocate(): void {
+
+  var circle = new google.maps.Circle({
+    center: (new google.maps.LatLng(this.coord.lat, this.coord.lon)),
+    radius: 10
+  });
+  this.autoComplete.setBounds(circle.getBounds());
+}
+
+//cancel journey pop from nav stack
+cancelJourney(): void {
+  this.navCtrl.pop();
+}
+
+//add journey
+addJourney(): void {
+
+  this.addRoute();
 
 
-    /* this.http.get('http://ionic.io', {}, {})
+  /* this.http.get('http://ionic.io', {}, {})
        .then(data => {
  
          console.log(data.status);
@@ -214,16 +275,16 @@ export class LocationPage {
  
        });*/
 
-    /* this.toast.show(`Journey Successfully Added`, '5000', 'top').subscribe(
-       toast => {
-         console.log(toast);
-       }
-     );*/
+  /* this.toast.show(`Journey Successfully Added`, '5000', 'top').subscribe(
+     toast => {
+       console.log(toast);
+     }
+   );*/
 
 
 
 
-  }
+}
 
 
 }
