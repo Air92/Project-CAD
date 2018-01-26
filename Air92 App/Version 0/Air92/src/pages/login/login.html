@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar color = "primary">
+        <ion-title>
+            Sign in 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class = "signBoxesbtn">
+    <ion-list>
+
+            <ion-item>
+              <ion-label floating>Username</ion-label>
+              <ion-input type="text" [(ngModel)] = "username"></ion-input>
+            </ion-item>
+          
+            <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" [(ngModel)] = "pass"></ion-input>
+            </ion-item>
+          
+          </ion-list>
+          <div class = "signBtn">
+                <button ion-button color="positive" (click)="loginBtn();">First Button</button>                
+          </div>
+   </div>  
+
+   <ion-card>
+   
+   </ion-card>}
+
+      
+</ion-content>

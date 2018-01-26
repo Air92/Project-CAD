@@ -7,6 +7,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {LocationPage} from '../pages/location/location';
 import {JourneyInitiationPage} from '../pages/journey-initiation/journey-initiation';
+import {LoginPage} from '../pages/login/login';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
@@ -28,13 +29,15 @@ import { IonicPageModule } from 'ionic-angular/module';
 
 import { SideBarComponent } from '../components/side-bar/side-bar';
 
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LocationPage,
     SideBarComponent,
-    JourneyInitiationPage
+    JourneyInitiationPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     MyApp,
     HomePage,
     LocationPage,
-    JourneyInitiationPage
+    JourneyInitiationPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
