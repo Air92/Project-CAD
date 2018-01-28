@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { LocationPage } from '../location/location';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -40,6 +41,11 @@ export class HomePage {
 
   button2(){
     this.navCtrl.setRoot(LocationPage);
+  }
+
+  pageNav(){
+    console.log("hit");
+    this.navCtrl.push(LoginPage)
   }
 
 }
