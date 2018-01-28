@@ -20,6 +20,12 @@ import { Toast } from '@ionic-native/toast';
  * npm install --save @ionic-native/toast
  */
 
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+/**
+ * ionic cordova plugin add cordova-plugin-android-permissions
+ * npm install --save @ionic-native/android-permissions
+ */
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -55,6 +61,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     Geolocation,
     HTTP,
     Toast,
+    AndroidPermissions,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
   

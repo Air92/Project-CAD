@@ -15,19 +15,16 @@
       <ion-input></ion-input>
     </ion-item>
 
-
     <ion-item>
       <ion-label stacked>Start Location</ion-label>
-      <ion-input (ionFocus)="FocusAutoComplete()" id="startSearch"></ion-input>
-      <button ion-button (click)="onLocateUser()" color="accent" item-right>Get Location</button>
+      <ion-input id="startSearch"></ion-input>
+      <button ion-button (click)="reolocate()" color="accent" item-right>Get Location</button>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>End Location</ion-label>
-      <ion-input (ionFocus)="FocusAutoComplete()" id="endSearch"></ion-input>
+      <ion-input (iononfocusout)="addRoute1();" id="endSearch"></ion-input>
     </ion-item>
-
-
 
     <button ion-button color="danger" id="DeleteButton" (click)="cancelJourney()">Cancel</button>
     <button ion-button color="positive" id="AddButton" (click)="addJourney()">Add</button> 

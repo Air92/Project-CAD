@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { LocationPage } from '../location/location';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 @Component({
@@ -9,13 +10,36 @@ import { LocationPage } from '../location/location';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public platform: Platform, private androidPermissions: AndroidPermissions) {
+
+   
+
+   
+    
+    
   
+  }
+
+  ngAfterViewInit()
+  {
+    console.log('start v1');
+    this.platform.ready().then(() => {
+      console.log('platform ready');
+      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION);
+      
+    })
+
+    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION);
+
   }
 
   test(){
     console.log("hit");
-    this.navCtrl.push(LocationPage)
+    this.navCtrl.setRoot(LocationPage)
+  }
+
+  button2(){
+    this.navCtrl.setRoot(LocationPage);
   }
 
 }
