@@ -126,17 +126,17 @@ export class LocationPage
   private placeDecode(address: string)
   {
     console.log('hit');
-    var result;
     return new Promise(function (resolve, reject)
     {
-      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=' + 'AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8'
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + 'AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8'
       var xhr = new XMLHttpRequest();
+      console.log(url);
       xhr.open('GET', url);
       xhr.onload = function ()
       {
         if (this.status >= 200 && this.status < 300)
         {
-          xhr.response;
+          console.log(xhr.response);
           resolve(xhr.response);
         } else
         {
@@ -147,7 +147,7 @@ export class LocationPage
         }
       };
     })
-    return result;
+  
   }
   //==================================================================================================================================
 
