@@ -37,13 +37,35 @@ export class LoginPage {
     console.log(this.username);
     console.log(this.pass);
 
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET",'https://air92.restlet.net/v1/userses/?media=json&name='+this.username+"&password="+ this.pass, false ); // false for synchronous request
-    xmlHttp.send( null );
-    console.log(xmlHttp.responseText);
-    //https://air92.restlet.net/v1/userses/?media=json
-    //'https://air92.restlet.net/v1/userses/?media=json?username='+ this.username + '&password='+ this.pass, false )
 
 
+  }
+
+  private placeDecode(address: string)
+  {
+    var url = 'https://air92.restlet.net/v1/userses/?media=json&name='+this.username+"&password="+ this.pass;
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = function () {
+        if (this.status >= 200 && this.status < 300) {
+          console.log(xhr.response);
+          resolve(xhr.response);
+        } else {
+          reject({
+            status: this.status,
+            statusText: xhr.statusText
+          });
+        }
+      };
+      xhr.onerror = function () {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      };
+      xhr.send();
+    });
+  
   }
 }

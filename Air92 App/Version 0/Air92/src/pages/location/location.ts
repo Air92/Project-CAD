@@ -107,14 +107,26 @@ export class LocationPage
         map: this.map
       })
 
-      //call function twice
-      var startAddress = this.placeDecode(this.searches.startSearch.value);
-      /*var endAddress = this.placeDecode(this.searches.endSearch.value);
 
-      //promise all
-      Promise.all([endAddress, startAddress]).then(values =>
+      var startAddress;
+      var endAddress;
+
+      this.placeDecode(this.searches.startSearch.value).then((result) =>{
+        startAddress = result;
+        
+      })
+      
+
+      
+
+      //call function twice
+ 
+      //var endAddress = this.placeDecode(this.searches.endSearch.value);
+
+      /*Promise.all([startAddress]).then(values =>
       {
-        this.renderRoute(route, render, values[1], values[0]);
+        console.log(startAddress);
+        //this.renderRoute(route, render, values[1], values[0]);
       })*/
     }
   }
@@ -123,30 +135,34 @@ export class LocationPage
 
   //============================================================= Decode ============================================================= 
   //method convertes input into formatted address
-  private placeDecode(address: string)
+  placeDecode =(address : string) =>
   {
-    console.log('hit');
-    return new Promise(function (resolve, reject)
-    {
-      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + 'AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8'
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + 'AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8';
+    return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
-      console.log(url);
       xhr.open('GET', url);
-      xhr.onload = function ()
-      {
-        if (this.status >= 200 && this.status < 300)
-        {
-          console.log(xhr.response);
-          resolve(xhr.response);
-        } else
-        {
+      xhr.onload = function () {
+        if (this.status >= 200 && this.status < 300) {
+          var result = JSON.parse(xhr.response);
+          resolve(result.results[0].geometry.location);
+          
+        } else {
           reject({
             status: this.status,
             statusText: xhr.statusText
           });
         }
       };
-    })
+      xhr.onerror = function () {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      };
+      xhr.send();
+    });
+
+  
   
   }
   //==================================================================================================================================
