@@ -22,6 +22,7 @@ declare var google;
 })
 export class LocationPage
 {
+
   //store map object
   map: any;
   //store user location
@@ -58,44 +59,37 @@ export class LocationPage
   {
 
     console.log('location page')
-    this.platform.ready().then(() => {
+    this.platform.ready().then(() =>
+    {
       console.log('page ready');
-       //get input elements, get the first tag within the ion-input tag
-    this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
-    this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
-    this.buttons.addButton = document.getElementById("addButton");
+      //get input elements, get the first tag within the ion-input tag
+      this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
+      this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+      this.buttons.addButton = document.getElementById("addButton");
 
-    this.locateUser().then((result) =>{
-      this.mapGen(document.getElementById('map')).then(() =>{
-        this.markerCreator(this.coord.lat, this.coord.long);
+      this.locateUser().then((result) =>
+      {
+        this.mapGen(document.getElementById('map')).then(() =>
+        {
+          this.markerCreator(this.coord.lat, this.coord.long);
 
-      })
-      
+        })
+      });
+
+      this.initAutoComplete();
 
     });
-    
-    this.initAutoComplete();
-
-    });
-   
-   
-
-    
-      
-      
-       
-        
-      
-    
-
   }
 
   public reolocate()
   {
+    this.marker.setMap(null);
+    this.placeEncode(this.coord.lat, this.coord.long);
     this.locateUser().then(() =>
     {
       console.log(this.coord.lat);
-      this.markerCreator(this.coord.lat,this.coord.long);
+      this.map.setCenter(new google.maps.LatLng(this.coord.lat, this.coord.long));
+      this.markerCreator(this.coord.lat, this.coord.long);
     })
   }
 
@@ -103,10 +97,10 @@ export class LocationPage
   //generate route on map
   private addRoute()
   {
+
     console.log(this.searches.startSearch.value);
     if (this.searches.startSearch.value != '' && this.searches.endSearch.value != '')
     {
-
       var route = new google.maps.DirectionsService;
       var render = new google.maps.DirectionsRenderer({
         draggable: false,
@@ -114,14 +108,14 @@ export class LocationPage
       })
 
       //call function twice
-      var startAddress = this.placeDecode(this.searches.startSearch);
-      var endAddress = this.placeDecode(this.searches.endSearch);
+      var startAddress = this.placeDecode(this.searches.startSearch.value);
+      /*var endAddress = this.placeDecode(this.searches.endSearch.value);
 
       //promise all
       Promise.all([endAddress, startAddress]).then(values =>
       {
         this.renderRoute(route, render, values[1], values[0]);
-      })
+      })*/
     }
   }
   //==================================================================================================================================
@@ -129,30 +123,44 @@ export class LocationPage
 
   //============================================================= Decode ============================================================= 
   //method convertes input into formatted address
-  private placeDecode(input: HTMLInputElement)
+  private placeDecode(address: string)
   {
-
-    var result = new Promise(function (resolve, reject)
+    console.log('hit');
+    var result;
+    return new Promise(function (resolve, reject)
     {
-      var location = input.value;
-
-      var geoCode = new google.maps.Geocoder();
-      geoCode.geocode({
-        address: location
-      }, function (result, status)
+      var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=' + 'AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8'
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = function ()
+      {
+        if (this.status >= 200 && this.status < 300)
         {
-          if (status == 'OK')
-          {
-            console.log(result[0].formatted_address);
-            resolve(result[0].formatted_address);
-          }
-        })
-    });
-
+          xhr.response;
+          resolve(xhr.response);
+        } else
+        {
+          reject({
+            status: this.status,
+            statusText: xhr.statusText
+          });
+        }
+      };
+    })
     return result;
-
   }
   //==================================================================================================================================
+
+  private placeEncode(lat: any, long: any)
+  {
+    var geoCoder = new google.maps.Geocoder();
+    var result;
+    geoCoder.geocode(new google.maps.LatLng(53.4117, this.coord.long), function (results, status)
+    {
+
+      console.log(result);
+    });
+  }
 
 
   //============================================================= Render ============================================================= 
@@ -169,7 +177,6 @@ export class LocationPage
         console.log(status);
         if (status === 'OK')
         {
-
           render.setDirections(response);
         }
       });
@@ -202,10 +209,10 @@ export class LocationPage
   //locates users
   locateUser = () =>
   {
-     console.log('user located');
+    console.log('user located');
     return new Promise((resolve, reject) =>
     {
-      var options = {maximumAge: 0, timeout: 10000, enableHighAccuracy:true};
+      var options = { maximumAge: 0, timeout: 10000, enableHighAccuracy: true };
       this.geolocation.getCurrentPosition(options).then((location) =>
       {
         console.log('success');
@@ -221,7 +228,7 @@ export class LocationPage
   //==================================================================================================================================
 
   //============================================================= Marker =============================================================
-  markerCreator(lat: number, long: number)
+  markerCreator(lat: any, long: any)
   {
     this.marker = new google.maps.Marker({
       map: this.map,
