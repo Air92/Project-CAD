@@ -37,10 +37,21 @@ export class LoginPage {
     console.log(this.username);
     console.log(this.pass);
 
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET",'https://air92.restlet.net/v1/userses/?media=json&name='+this.username+"&password="+ this.pass, false ); // false for synchronous request
-    xmlHttp.send( null );
-    console.log(xmlHttp.responseText);
+    this.http.get('https://air92.restlet.net/v1/userses/?media=json', {}, {})
+      .then(data => {
+
+        console.log(data.status);
+        console.log(data.data); // data received by server
+        console.log(data.headers);
+
+      })
+      .catch(error => {
+
+        console.log(error.status);
+        console.log(error.error); // error message as string
+        console.log(error.headers);
+
+      });
     //https://air92.restlet.net/v1/userses/?media=json
     //'https://air92.restlet.net/v1/userses/?media=json?username='+ this.username + '&password='+ this.pass, false )
 
