@@ -1,16 +1,19 @@
 page-login {
-
-    .signBtn{
-        padding-left: 5%;
-        padding-top: 5%;
-    }
-
-    .signBoxesbtn{
-        padding-left: 2%;
-        padding-top: 5%;
-    }
+  #signBtn {
+    padding: 8%;
+    margin-top: 10%;
+    margin-left: 15%;
+  }
+  #registerBtn {
+    padding: 8%;
+    margin-top: 10%;
+    margin-left: 14%;
+  }
+  #signBoxesbtn {
+    padding-top: 5%;
+  }
 }
 
-.toast-container{
-    background-color: white;
+.toast-container {
+  background-color: white;
 }

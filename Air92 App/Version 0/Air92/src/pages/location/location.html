@@ -12,7 +12,7 @@
   <div (swipe)="sideBar.toggle()" id="page">
     <ion-item>
       <ion-label stacked>Journey Name</ion-label>
-      <ion-input></ion-input>
+      <ion-input id="Journey"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -23,7 +23,7 @@
 
     <ion-item>
       <ion-label stacked>End Location</ion-label>
-      <ion-input (iononfocusout)="addRoute1();" id="endSearch"></ion-input>
+      <ion-input (ionFocus)="addRoute()" id="endSearch"></ion-input>
     </ion-item>
 
     <button ion-button color="danger" id="DeleteButton" (click)="cancelJourney()">Cancel</button>

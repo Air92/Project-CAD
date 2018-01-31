@@ -46,7 +46,8 @@ export class LocationPage
   //object for start and end location for journey
   searches: any = {
     startSearch: null,
-    endSearch: null
+    endSearch: null,
+    name: null
   };
 
 
@@ -65,6 +66,7 @@ export class LocationPage
       //get input elements, get the first tag within the ion-input tag
       this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
       this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+      this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
       this.buttons.addButton = document.getElementById("addButton");
 
       this.locateUser().then((result) =>
@@ -81,13 +83,20 @@ export class LocationPage
     });
   }
 
+  public checkFocus()
+  {
+    console.log('hit');
+  }
+
   public reolocate()
   {
     this.marker.setMap(null);
-    this.placeEncode(this.coord.lat, this.coord.long);
     this.locateUser().then(() =>
     {
-      console.log(this.coord.lat);
+      this.coordEncode(this.coord.lat, this.coord.long).then((result) =>
+      {
+        this.searches.startSearch.value = result;
+      })
       this.map.setCenter(new google.maps.LatLng(this.coord.lat, this.coord.long));
       this.markerCreator(this.coord.lat, this.coord.long);
     })
@@ -97,7 +106,6 @@ export class LocationPage
   //generate route on map
   private addRoute()
   {
-
     console.log(this.searches.startSearch.value);
     if (this.searches.startSearch.value != '' && this.searches.endSearch.value != '')
     {
@@ -111,23 +119,18 @@ export class LocationPage
       var startAddress;
       var endAddress;
 
-      this.placeDecode(this.searches.startSearch.value).then((result) =>{
-        startAddress = result;
-        
-      })
-      
-
-      
-
-      //call function twice
- 
-      //var endAddress = this.placeDecode(this.searches.endSearch.value);
-
-      /*Promise.all([startAddress]).then(values =>
+      this.placeDecode(this.searches.startSearch.value).then((result) =>
       {
-        console.log(startAddress);
-        //this.renderRoute(route, render, values[1], values[0]);
-      })*/
+        startAddress = result;
+        this.placeDecode(this.searches.endSearch.value).then((result) =>
+        {
+          endAddress = result;
+          console.log(startAddress);
+          console.log(endAddress);
+          this.renderRoute(route, render, startAddress, endAddress);
+        });
+
+      })
     }
   }
   //==================================================================================================================================
@@ -135,34 +138,43 @@ export class LocationPage
 
   //============================================================= Decode ============================================================= 
   //method convertes input into formatted address
-  placeDecode =(address : string) =>
+  placeDecode = (address: string) =>
   {
     var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURI(address) + '&key=' + 'AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8';
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =>
+    {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url);
-      xhr.onload = function (status) {
+      xhr.onload = function (status)
       {
+        {
           var result = JSON.parse(xhr.response);
           resolve(result.results[0].geometry.location);
-      } 
-    };
+        }
+      };
       xhr.send();
-  });
-
-  
-  
+    });
   }
   //==================================================================================================================================
 
-  private placeEncode(lat: any, long: any)
+  private coordEncode(lat: any, long: any)
   {
-    var geoCoder = new google.maps.Geocoder();
-    var result;
-    geoCoder.geocode(new google.maps.LatLng(53.4117, this.coord.long), function (results, status)
+    console.log(lat);
+    console.log(long);
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.coord.lat + ',' + this.coord.long + '&key=AIzaSyAg2KphKp5UyX6ehRqypZ3HH8ZVpP4pRz8';
+    return new Promise((resolve, reject) =>
     {
-
-      console.log(result);
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = function (status)
+      {
+        {
+          var result = JSON.parse(xhr.response);
+          console.log((result.results[0].formatted_address))
+          resolve((result.results[0].formatted_address));
+        }
+      };
+      xhr.send();
     });
   }
 
@@ -267,36 +279,72 @@ export class LocationPage
   //add journey
   addJourney(): void
   {
+    if (this.searches.startSearch.value != '' && this.searches.endSearch.value != '' && this.searches.name.value != '')
+    {
 
-    this.addRoute();
+      var locations = {
+        start: null,
+        end: null
+      }
 
+      this.placeDecode(this.searches.startSearch.value).then((result) =>
+      {
+        locations.start = result;
+        this.placeDecode(this.searches.endSearch.value).then((result) =>
+        {
+          locations.end = result;
 
-    /* this.http.get('http://ionic.io', {}, {})
-       .then(data => {
- 
-         console.log(data.status);
-         console.log(data.headers);
- 
-       })
-       .catch(error => {
- 
-         console.log(error.status);
-         console.log(error.error); // error message as string
-         console.log(error.headers);
- 
-       });*/
+          console.log(locations.start);
+          console.log(locations.end);
 
-    /* this.toast.show(`Journey Successfully Added`, '5000', 'top').subscribe(
-       toast => {
-         console.log(toast);
-       }
-     );*/
-
-
+          this.postData(this.searches.name.value, locations.start, locations.end).then((result) =>
+          {
+            console.log(result);
+            this.toast.show(this.searches.name.value + ' Journey has been added', '5000', 'top', ).subscribe(
+              toast =>
+              {
+                console.log(toast);
+              }
+            )
+          });
+        })
+      })
+    }
   }
 
 
+  postData = (name: any, start: any, end: any) =>
+  {
+    var param =
+      {
+        "name": name,
+        "startLat": start.lat,
+        "startLong": start.lng,
+        "endLat": end.lat,
+        "endLong":end.lng,
+        "category": "a3c7a200-05bc-11e8-9af9-41fa26177d88"
+      };
 
+    console.log(JSON.stringify(param));
+
+    var url = 'https://air92.restlet.net/v1/specificJourneies/';
+    return new Promise(function (resolve, reject)
+    {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      xhr.onload = function ()
+      {
+        resolve(xhr.response);
+      };
+      xhr.send(JSON.stringify(param));
+    });
+  }
 
 }
+
+
+
+
 

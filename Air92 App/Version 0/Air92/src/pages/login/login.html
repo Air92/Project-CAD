@@ -1,21 +1,21 @@
 <ion-content>
-  <div class = "signBoxesbtn">
+  <div id="signBoxesbtn">
     <ion-list>
 
-            <ion-item>
-              <ion-label floating>Username</ion-label>
-              <ion-input type="text" [(ngModel)] = "username"></ion-input>
-            </ion-item>
-          
-            <ion-item>
-              <ion-label floating>Password</ion-label>
-              <ion-input type="password" [(ngModel)] = "pass"></ion-input>
-            </ion-item>
-          
-          </ion-list>
-          <div class = "signBtn">
-                <button ion-button color="positive" (click)="loginBtn();">Login</button>                
-          </div>
-          <button ion-button color="secondary">Register</button>
-   </div>  
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" [(ngModel)]="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="pass"></ion-input>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+  <button id="signBtn" ion-button color="positive" (click)="loginBtn();">Login</button>
+  <button id="registerBtn" ion-button color="secondary">Register</button>
+
 </ion-content>

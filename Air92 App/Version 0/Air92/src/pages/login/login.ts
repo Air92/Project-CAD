@@ -1,14 +1,6 @@
-import {
-  Component
-} from '@angular/core';
-import {
-  IonicPage,
-  NavController,
-  NavParams
-} from 'ionic-angular';
-import {
-  HTTP
-} from '@ionic-native/http';
+import{ Component } from '@angular/core';
+import{ IonicPage, NavController, NavParams } from 'ionic-angular';
+import{ HTTP } from '@ionic-native/http';
 import { Toast } from '@ionic-native/toast';
 
 /**
@@ -23,59 +15,64 @@ import { Toast } from '@ionic-native/toast';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage
+{
   username = "";
   pass = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP, private toast: Toast) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP, private toast: Toast) { }
 
 
-  ionViewDidLoad() {
+  ionViewDidLoad()
+  {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  loginBtn() {
-   
-    this.checkLogin().then((result) =>{
-      if(result == 'Error'){
-        
-        this.toast.show(`Username or Password is wrong`, '5000', 'top',).subscribe(
-          toast => {
+  loginBtn()
+  {
+
+    this.checkLogin().then((result) =>
+    {
+      if (result == 'Error')
+      {
+        this.toast.show(`Username or Password is wrong`, '5000', 'top', ).subscribe(
+          toast =>
+          {
             console.log(toast);
           }
         );
       }
-      else{
+      else
+      {
         this.toast.show(`Correct`, '5000', 'top').subscribe(
-          toast => {
+          toast =>
+          {
             console.log(toast);
           }
         );
-
       }
-      
-      
-    })
-
-
-
+    });
   }
 
-  checkLogin =() =>
+  checkLogin = () =>
   {
-    var url = 'https://air92.restlet.net/v1/userses/?media=json&name='+this.username+"&password="+this.pass;
-    return new Promise(function (resolve, reject) {
+    var url = 'https://air92.restlet.net/v1/userses/?media=json&name=' + this.username + "&password=" + this.pass;
+    return new Promise(function (resolve, reject)
+    {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url);
-      xhr.onload = function () {
-        
-          if(xhr.response == '[]'){
-            resolve('Error');
-          }
-          else{
-            var result = JSON.parse(xhr.response);
-            resolve(result);
-          }
+      xhr.onload = function ()
+      {
+
+        if (xhr.response == '[]')
+        {
+          resolve('Error');
+        }
+        else
+        {
+          var result = JSON.parse(xhr.response);
+          resolve(result);
+        }
       };
       xhr.send();
     });
