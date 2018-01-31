@@ -9,6 +9,8 @@ import {LocationPage} from '../pages/location/location';
 import {JourneyInitiationPage} from '../pages/journey-initiation/journey-initiation';
 import {LoginPage} from '../pages/login/login';
 
+
+
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
 /**
@@ -34,6 +36,8 @@ import { IonicPageModule } from 'ionic-angular/module';
 
 
 import { SideBarComponent } from '../components/side-bar/side-bar';
+import { RegisterPage } from '../pages/register/register';
+
 
 
 @NgModule({
@@ -43,7 +47,10 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     LocationPage,
     SideBarComponent,
     JourneyInitiationPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
+    
+
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,10 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     HomePage,
     LocationPage,
     JourneyInitiationPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
+
+    
   ],
   providers: [
     StatusBar,
