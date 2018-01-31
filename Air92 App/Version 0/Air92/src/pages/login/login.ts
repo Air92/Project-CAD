@@ -68,7 +68,7 @@ export class LoginPage {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url);
       xhr.onload = function () {
-        if (this.status >= 200 && this.status < 300) {
+        
           if(xhr.response == '[]'){
             resolve('Error');
           }
@@ -76,26 +76,8 @@ export class LoginPage {
             var result = JSON.parse(xhr.response);
             resolve(result);
           }
-          
-        } else {
-          reject({
-            status: this.status,
-            statusText: xhr.statusText
-          });
-        }
-      };
-      xhr.onerror = function () {
-        reject({
-          status: this.status,
-          statusText: xhr.statusText
-        });
       };
       xhr.send();
     });
-
-  
-  
   }
-
-  
 }
