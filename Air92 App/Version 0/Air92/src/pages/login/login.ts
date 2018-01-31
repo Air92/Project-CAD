@@ -9,6 +9,7 @@ import {
 import {
   HTTP
 } from '@ionic-native/http';
+import { Toast } from '@ionic-native/toast';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +27,7 @@ export class LoginPage {
   username = "";
   pass = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP, private toast: Toast) {}
 
 
   ionViewDidLoad() {
@@ -34,25 +35,49 @@ export class LoginPage {
   }
 
   loginBtn() {
-    console.log(this.username);
-    console.log(this.pass);
+   
+    this.checkLogin().then((result) =>{
+      if(result == 'Error'){
+        
+        this.toast.show(`Username or Password is wrong`, '5000', 'top',).subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+      }
+      else{
+        this.toast.show(`Correct`, '5000', 'top').subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+
+      }
+      
+      
+    })
 
 
 
   }
 
-  private placeDecode(address: string)
+  checkLogin =() =>
   {
-    var url = 'https://air92.restlet.net/v1/userses/?media=json&name='+this.username+"&password="+ this.pass;
+    var url = 'https://air92.restlet.net/v1/userses/?media=json&name='+this.username+"&password="+this.pass;
     return new Promise(function (resolve, reject) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url);
       xhr.onload = function () {
-          console.log(xhr.response);
-          resolve(xhr.response);
+        
+          if(xhr.response == '[]'){
+            resolve('Error');
+          }
+          else{
+            var result = JSON.parse(xhr.response);
+            resolve(result);
+          }
       };
       xhr.send();
     });
-  
   }
 }
