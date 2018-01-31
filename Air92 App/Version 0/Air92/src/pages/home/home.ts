@@ -3,6 +3,7 @@ import { NavController, Platform } from 'ionic-angular';
 import { LocationPage } from '../location/location';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { LoginPage } from '../login/login';
+import { RegisterPage } from '../register/register';
 
 
 @Component({
@@ -46,6 +47,11 @@ export class HomePage {
   pageNav(){
     console.log("hit");
     this.navCtrl.push(LoginPage)
+  }
+
+  registerNav(){
+    console.log("hit");
+    this.navCtrl.push(RegisterPage)
   }
 
 }
