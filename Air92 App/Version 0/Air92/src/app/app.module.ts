@@ -12,6 +12,8 @@ import {JourneyListPage} from '../pages/journey-list/journey-list';
 import {RegisterPage} from '../pages/register/register';
 import { CreditsPage } from '../pages/credits/credits';
 
+
+
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
 /**

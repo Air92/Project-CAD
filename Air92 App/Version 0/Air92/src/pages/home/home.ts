@@ -6,6 +6,7 @@ import { LoginPage } from '../login/login';
 import { JourneyListPage} from '../journey-list/journey-list';
 import { RegisterPage} from '../register/register';
 import { CreditsPage } from '../credits/credits';
+import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
 
 
 @Component({
@@ -62,6 +63,10 @@ export class HomePage {
 
   public credits(){
     this.navCtrl.push(CreditsPage);
+  }
+  journeyInit()
+  {
+    this.navCtrl.push(JourneyInitiationPage);
   }
 
 }
