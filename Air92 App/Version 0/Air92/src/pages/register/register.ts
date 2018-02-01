@@ -25,5 +25,42 @@ export class RegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
+
+  public reg() {
+
+    this.postData(this.username, this.pass, this.email).then((result) => {
+      console.log(result);
+      // this.toast.show(this.searches.name.value + ' Journey has been added', '5000', 'top', ).subscribe(
+      //   toast =>
+      //   {
+      //     console.log(toast);
+      //   }
+      // )
+    });
+  }
+
+  postData = (username: string, pass: string, email: string) => {
+    var param =
+      {
+        "name": username,
+        "password": pass,
+        "email": email,
+        "newUser": true
+      };
+
+    console.log(JSON.stringify(param));
+
+    var url = 'https://air92.restlet.net:443/v1/userses/';
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.send(JSON.stringify(param));
+    });
+  }
 }
 
