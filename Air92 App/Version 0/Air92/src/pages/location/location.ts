@@ -38,9 +38,6 @@ export class LocationPage
     deleteButton: null
   }
 
-
-
-
   //var for google maps autocomplete
   autoComplete: any;
   //object for start and end location for journey
@@ -52,9 +49,6 @@ export class LocationPage
 
 
   constructor(public navCtrl: NavController, private geolocation: Geolocation, private http: HTTP, private toast: Toast, public platform: Platform) { }
-
-
-
 
   ngAfterViewInit()
   {
@@ -157,6 +151,8 @@ export class LocationPage
   }
   //==================================================================================================================================
 
+  //============================================================= Encode =============================================================
+  //Convert co-ordinates to formatted address
   private coordEncode(lat: any, long: any)
   {
     console.log(lat);
@@ -177,6 +173,7 @@ export class LocationPage
       xhr.send();
     });
   }
+  //==================================================================================================================================
 
 
   //============================================================= Render ============================================================= 
@@ -244,6 +241,7 @@ export class LocationPage
   //==================================================================================================================================
 
   //============================================================= Marker =============================================================
+  //create marker on map
   markerCreator(lat: any, long: any)
   {
     this.marker = new google.maps.Marker({
@@ -270,12 +268,16 @@ export class LocationPage
   //==================================================================================================================================
 
 
+  //=============================================================Cancel===============================================================
   //cancel journey pop from nav stack
   cancelJourney(): void
   {
     this.navCtrl.setRoot(HomePage);
   }
+  //==================================================================================================================================
 
+
+  //=============================================================Add Jour=============================================================
   //add journey
   addJourney(): void
   {
@@ -306,13 +308,18 @@ export class LocationPage
                 console.log(toast);
               }
             )
+
+            this.navCtrl.setRoot(HomePage);
           });
         })
       })
     }
   }
+  //==================================================================================================================================
 
 
+  //=============================================================Post Data============================================================
+  //post data to RestLet database 
   postData = (name: any, start: any, end: any) =>
   {
     var param =
@@ -321,7 +328,7 @@ export class LocationPage
         "startLat": start.lat,
         "startLong": start.lng,
         "endLat": end.lat,
-        "endLong":end.lng,
+        "endLong": end.lng,
         "category": "a3c7a200-05bc-11e8-9af9-41fa26177d88"
       };
 
@@ -341,8 +348,8 @@ export class LocationPage
       xhr.send(JSON.stringify(param));
     });
   }
-
 }
+//==================================================================================================================================
 
 
 

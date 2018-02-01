@@ -8,8 +8,7 @@ import { HomePage } from '../pages/home/home';
 import {LocationPage} from '../pages/location/location';
 import {JourneyInitiationPage} from '../pages/journey-initiation/journey-initiation';
 import {LoginPage} from '../pages/login/login';
-
-
+import {JourneyListPage} from '../pages/journey-list/journey-list';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
@@ -34,9 +33,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicPageModule } from 'ionic-angular/module';
 
-
 import { SideBarComponent } from '../components/side-bar/side-bar';
-import { RegisterPage } from '../pages/register/register';
+
 
 
 
@@ -48,8 +46,8 @@ import { RegisterPage } from '../pages/register/register';
     SideBarComponent,
     JourneyInitiationPage,
     LoginPage,
-    RegisterPage
-    
+    JourneyListPage
+
 
   ],
   imports: [
@@ -65,9 +63,7 @@ import { RegisterPage } from '../pages/register/register';
     LocationPage,
     JourneyInitiationPage,
     LoginPage,
-    RegisterPage
-
-    
+    JourneyListPage
   ],
   providers: [
     StatusBar,

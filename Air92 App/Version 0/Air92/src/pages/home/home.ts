@@ -3,7 +3,7 @@ import { NavController, Platform } from 'ionic-angular';
 import { LocationPage } from '../location/location';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { LoginPage } from '../login/login';
-import { RegisterPage } from '../register/register';
+import { JourneyListPage} from '../journey-list/journey-list';
 
 
 @Component({
@@ -51,7 +51,11 @@ export class HomePage {
 
   registerNav(){
     console.log("hit");
-    this.navCtrl.push(RegisterPage)
+    
+  }
+
+  journeylist(){
+    this.navCtrl.push(JourneyListPage);
   }
 
 }
