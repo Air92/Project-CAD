@@ -10,6 +10,7 @@ import {JourneyInitiationPage} from '../pages/journey-initiation/journey-initiat
 import {LoginPage} from '../pages/login/login';
 import {JourneyListPage} from '../pages/journey-list/journey-list';
 import {RegisterPage} from '../pages/register/register';
+import { CreditsPage } from '../pages/credits/credits';
 
 
 
@@ -42,6 +43,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
 
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -51,7 +53,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     JourneyInitiationPage,
     LoginPage,
     JourneyListPage,
-    RegisterPage
+    RegisterPage,
+    CreditsPage
 
 
   ],
@@ -69,7 +72,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     JourneyInitiationPage,
     LoginPage,
     JourneyListPage,
-    RegisterPage
+    RegisterPage,
+    CreditsPage
   ],
   providers: [
     StatusBar,
