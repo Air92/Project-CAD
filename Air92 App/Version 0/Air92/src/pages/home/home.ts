@@ -5,6 +5,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { LoginPage } from '../login/login';
 import { JourneyListPage} from '../journey-list/journey-list';
 import { RegisterPage} from '../register/register';
+import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
 
 
 @Component({
@@ -57,6 +58,11 @@ export class HomePage {
 
   journeylist(){
     this.navCtrl.push(JourneyListPage);
+  }
+
+  journeyInit()
+  {
+    this.navCtrl.push(JourneyInitiationPage);
   }
 
 }

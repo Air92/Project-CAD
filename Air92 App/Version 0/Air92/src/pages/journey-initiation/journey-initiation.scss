@@ -7,16 +7,23 @@ page-journey-initiation {
     }
 
     #StartButton {
-        margin-left: 25%;
+        margin-left: 20%;
       }
       #PauseButton {
-        margin-left: 35%;
+        margin-left: 30%;
     }
 
     #Results{
-        margin-top: 23%;
+       //margin-top: 23%;
+      // margin-top: 3%;
         text-align: center;
     }
+
+    #journeyMap {
+        height: 70%;
+        //background-color: #53B4F5;
+        margin: 2%;
+      }
 
     h1 {
         //margin-top: 5%;
