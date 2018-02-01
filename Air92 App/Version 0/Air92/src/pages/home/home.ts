@@ -5,6 +5,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { LoginPage } from '../login/login';
 import { JourneyListPage} from '../journey-list/journey-list';
 import { RegisterPage} from '../register/register';
+import { CreditsPage } from '../credits/credits';
 
 
 @Component({
@@ -57,6 +58,10 @@ export class HomePage {
 
   journeylist(){
     this.navCtrl.push(JourneyListPage);
+  }
+
+  public credits(){
+    this.navCtrl.push(CreditsPage);
   }
 
 }
