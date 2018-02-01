@@ -1,6 +1,8 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Toast } from '@ionic-native/toast';
+import {LoginPage} from '../login/login';
 
 /**
  * Generated class for the RegisterPage page.
@@ -19,7 +21,7 @@ export class RegisterPage {
   pass = "";
   email = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: Toast) {
   }
 
   ionViewDidLoad() {
@@ -30,12 +32,13 @@ export class RegisterPage {
 
     this.postData(this.username, this.pass, this.email).then((result) => {
       console.log(result);
-      // this.toast.show(this.searches.name.value + ' Journey has been added', '5000', 'top', ).subscribe(
-      //   toast =>
-      //   {
-      //     console.log(toast);
-      //   }
-      // )
+      this.toast.show(this.username + '  has been added', '5000', 'top', ).subscribe(
+         toast =>
+        {
+          this.navCtrl.setRoot(LoginPage);
+          console.log(toast);
+        }
+       )
     });
   }
 

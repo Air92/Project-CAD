@@ -52,29 +52,23 @@ export class LocationPage
 
   ngAfterViewInit()
   {
+    console.log('page ready');
+    //get input elements, get the first tag within the ion-input tag
+    this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
+    this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+    this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
+    this.buttons.addButton = document.getElementById("addButton");
 
-    console.log('location page')
-    this.platform.ready().then(() =>
+    this.locateUser().then((result) =>
     {
-      console.log('page ready');
-      //get input elements, get the first tag within the ion-input tag
-      this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
-      this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
-      this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
-      this.buttons.addButton = document.getElementById("addButton");
-
-      this.locateUser().then((result) =>
+      this.mapGen(document.getElementById('map')).then(() =>
       {
-        this.mapGen(document.getElementById('map')).then(() =>
-        {
-          this.markerCreator(this.coord.lat, this.coord.long);
+        this.markerCreator(this.coord.lat, this.coord.long);
 
-        })
-      });
-
-      this.initAutoComplete();
-
+      })
     });
+
+    this.initAutoComplete();
   }
 
   public checkFocus()
