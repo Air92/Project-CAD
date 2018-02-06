@@ -4,6 +4,7 @@ import{ HTTP } from '@ionic-native/http';
 import { Toast } from '@ionic-native/toast';
 import { LocationPage } from '../location/location';
 import { RegisterPage} from '../register/register';
+import {JourneyListPage} from '../journey-list/journey-list';
 
 /**
  * Generated class for the LoginPage page.
@@ -49,7 +50,7 @@ export class LoginPage
         this.toast.show(`Correct`, '5000', 'top').subscribe(
           toast =>
           {
-            this.navCtrl.setRoot(LocationPage);
+            this.navCtrl.setRoot(JourneyListPage);
             console.log(toast);
           }
         );
@@ -66,7 +67,6 @@ export class LoginPage
       xhr.open('GET', url);
       xhr.onload = function ()
       {
-
         if (xhr.response == '[]')
         {
           resolve('Error');

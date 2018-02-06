@@ -5,6 +5,7 @@ import { HTTP } from '@ionic-native/http';
 import { Toast } from '@ionic-native/toast';
 import { HomePage } from '../home/home';
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
+import {JourneyListPage} from '../journey-list/journey-list';
 
 /**
  * Generated class for the LocationPage page.
@@ -266,7 +267,7 @@ export class LocationPage
   //cancel journey pop from nav stack
   cancelJourney(): void
   {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(JourneyListPage);
   }
   //==================================================================================================================================
 
@@ -311,6 +312,9 @@ export class LocationPage
   }
   //==================================================================================================================================
 
+  public test(){
+    this.addRoute();
+  }
 
   //=============================================================Post Data============================================================
   //post data to RestLet database 
