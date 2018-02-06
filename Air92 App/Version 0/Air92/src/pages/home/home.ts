@@ -7,6 +7,7 @@ import { JourneyListPage} from '../journey-list/journey-list';
 import { RegisterPage} from '../register/register';
 import { CreditsPage } from '../credits/credits';
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
+import { BluetoothtestPage } from '../bluetoothtest/bluetoothtest';
 
 
 @Component({
@@ -73,6 +74,11 @@ export class HomePage
   journeyInit()
   {
     this.navCtrl.push(JourneyInitiationPage);
+  }
+
+  bluetooth()
+  {
+    this.navCtrl.push(BluetoothtestPage);
   }
 
 }

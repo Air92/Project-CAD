@@ -12,7 +12,7 @@ import {JourneyListPage} from '../pages/journey-list/journey-list';
 import {RegisterPage} from '../pages/register/register';
 import { CreditsPage } from '../pages/credits/credits';
 
-
+import {BluetoothtestPage} from '../pages/bluetoothtest/bluetoothtest';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
@@ -32,6 +32,11 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
  * npm install --save @ionic-native/android-permissions
  */
 
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+/**
+ * ionic cordova plugin add cordova-plugin-bluetooth-serial
+ * npm install --save @ionic-native/bluetooth-serial
+ */
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -54,6 +59,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     LoginPage,
     JourneyListPage,
     RegisterPage,
+    BluetoothtestPage,
     CreditsPage
 
 
@@ -73,6 +79,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     LoginPage,
     JourneyListPage,
     RegisterPage,
+    BluetoothtestPage,
     CreditsPage
   ],
   providers: [
@@ -81,7 +88,9 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     Geolocation,
     HTTP,
     Toast,
+    BluetoothSerial,
     AndroidPermissions,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
   
