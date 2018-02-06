@@ -5,6 +5,7 @@ import { HTTP } from '@ionic-native/http';
 import { Toast } from '@ionic-native/toast';
 import { HomePage } from '../home/home';
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
+import {JourneyListPage} from '../journey-list/journey-list';
 
 /**
  * Generated class for the LocationPage page.
@@ -52,29 +53,23 @@ export class LocationPage
 
   ngAfterViewInit()
   {
+    console.log('page ready');
+    //get input elements, get the first tag within the ion-input tag
+    this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
+    this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+    this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
+    this.buttons.addButton = document.getElementById("addButton");
 
-    console.log('location page')
-    this.platform.ready().then(() =>
+    this.locateUser().then((result) =>
     {
-      console.log('page ready');
-      //get input elements, get the first tag within the ion-input tag
-      this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
-      this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
-      this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
-      this.buttons.addButton = document.getElementById("addButton");
-
-      this.locateUser().then((result) =>
+      this.mapGen(document.getElementById('map')).then(() =>
       {
-        this.mapGen(document.getElementById('map')).then(() =>
-        {
-          this.markerCreator(this.coord.lat, this.coord.long);
+        this.markerCreator(this.coord.lat, this.coord.long);
 
-        })
-      });
-
-      this.initAutoComplete();
-
+      })
     });
+
+    this.initAutoComplete();
   }
 
   public checkFocus()
@@ -272,7 +267,7 @@ export class LocationPage
   //cancel journey pop from nav stack
   cancelJourney(): void
   {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(JourneyListPage);
   }
   //==================================================================================================================================
 
@@ -317,6 +312,9 @@ export class LocationPage
   }
   //==================================================================================================================================
 
+  public test(){
+    this.addRoute();
+  }
 
   //=============================================================Post Data============================================================
   //post data to RestLet database 

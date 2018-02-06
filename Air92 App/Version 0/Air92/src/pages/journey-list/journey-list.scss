@@ -5,6 +5,40 @@ page-journey-list {
         height: 100%;
     }
 
+    #sideBar{
+        height:100%;
+        width:100%;
+    }
+    
+    #add{
+        width:93%;
+        margin-left: 4%;
+        margin-top: 15%;
+    }
+
+    #card{
+        height: 30%;
+        position: relative;
+        background: #494947;
+    }
+
+   #extension{
+       height: 100%;
+   }
+
+   #header{
+       padding: 5%;
+   }
+
+    #locMap{
+        height: 75%;
+        width: 80%;
+    }
+
+}
+
+ion-icon{
+    float: right;
 }
 
 ion-header{

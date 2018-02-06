@@ -14,9 +14,26 @@
 
 
 <ion-content padding>
-    <side-bar #sideBar></side-bar>
+  <side-bar #sideBar> </side-bar>
 
-    <div (swipe)="sideBar.toggle()" id="page">
+  <div id="sideBar" (swipe)="sideBar.toggle">
+   
+
+    
+    <div id="card">
+    <h1 id="header">Work</h1>
+     <div id="extension">
+        <div id="locMap"></div>
+      </div>
     </div>
+     
+       
+
+
+
+    <button ion-button color="danger" id="add" (click)="add()"><ion-icon name="add-circle"></ion-icon></button>
+
+  </div>
+  
 
 </ion-content>
