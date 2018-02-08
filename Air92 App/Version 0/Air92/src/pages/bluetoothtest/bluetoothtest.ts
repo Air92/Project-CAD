@@ -43,7 +43,7 @@ export class BluetoothtestPage {
 
 		}).catch(res => {
       console.log('Fail!');
-      console.log('Fail!s');
+      console.log('Fail!a');
 		});
 
 
