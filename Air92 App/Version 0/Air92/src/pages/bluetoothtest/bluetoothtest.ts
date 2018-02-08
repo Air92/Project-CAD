@@ -15,11 +15,38 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 })
 export class BluetoothtestPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public bluetoothSerial: BluetoothSerial) {
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BluetoothtestPage');
+    this.blue();
+  }
+
+  blue()
+  {
+
+    var phone = "08:3D:88:1D:61:41";
+    //this.bluetooth.connect(phone);
+    
+    this.bluetoothSerial.isEnabled().then(res => {
+
+      this.bluetoothSerial.list();
+			this.bluetoothSerial.connect(phone);
+			this.bluetoothSerial.isConnected().then(res => {
+				console.log(res);
+			}).catch(res => {
+				console.log('Fail2!');
+				console.log(res);
+			});
+
+		}).catch(res => {
+			console.log('Fail!');
+		});
+
+
+    
   }
 
 }
