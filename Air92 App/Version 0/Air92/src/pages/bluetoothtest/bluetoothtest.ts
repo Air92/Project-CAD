@@ -27,7 +27,7 @@ export class BluetoothtestPage {
   blue()
   {
 
-    var phone = "08:3D:88:1D:61:41";
+    var phone = "74:DF:BF:51:7D:8A";
     //this.bluetooth.connect(phone);
     
     this.bluetoothSerial.isEnabled().then(res => {
