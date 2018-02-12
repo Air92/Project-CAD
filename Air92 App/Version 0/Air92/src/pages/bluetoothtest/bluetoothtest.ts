@@ -29,17 +29,24 @@ export class BluetoothtestPage {
 
     var phone = "74:DF:BF:51:7D:8A";
     //this.bluetooth.connect(phone);
-    
+    this.bluetoothSerial.write([186, 220, 222]).then((success)=>{
+      console.log(success);});
+
     this.bluetoothSerial.isEnabled().then(res => {
 
-      this.bluetoothSerial.list();
-			this.bluetoothSerial.connect(phone);
-			this.bluetoothSerial.isConnected().then(res => {
-				console.log(res);
-			}).catch(res => {
-				console.log('Fail2!');
-				console.log(res);
-			});
+      // this.bluetoothSerial.list();
+			// this.bluetoothSerial.connect(phone);
+			// this.bluetoothSerial.isConnected().then(res => {
+			// 	console.log(res);
+			// }).catch(res => {
+			// 	console.log('Fail2!');
+			// 	console.log(res);
+      // });
+      
+      // Write a string
+this.bluetoothSerial.write([186, 220, 222]).then((success)=>{
+  console.log(success);
+});
 
 		}).catch(res => {
       console.log('Fail!');
