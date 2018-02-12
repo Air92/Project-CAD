@@ -33,7 +33,8 @@ export class BluetoothtestPage {
     this.bluetoothSerial.isEnabled().then(res => {
 
       this.bluetoothSerial.list();
-			this.bluetoothSerial.connect(phone);
+      this.bluetoothSerial.connect(phone);
+      this.bluetoothSerial.list();
 			this.bluetoothSerial.isConnected().then(res => {
 				console.log(res);
 			}).catch(res => {
