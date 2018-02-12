@@ -47,6 +47,15 @@ export class BluetoothtestPage {
 this.bluetoothSerial.write([186, 220, 222]).then((success)=>{
   console.log(success);
 });
+      this.bluetoothSerial.list();
+      this.bluetoothSerial.connect(phone);
+      this.bluetoothSerial.list();
+			this.bluetoothSerial.isConnected().then(res => {
+				console.log(res);
+			}).catch(res => {
+				console.log('Fail2!');
+				console.log(res);
+			});
 
 		}).catch(res => {
       console.log('Fail!');

@@ -22,10 +22,19 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <allow-navigation href="http://10.182.79.48:8100" />
+<<<<<<< HEAD
     <allow-navigation href="http://10.182.77.4:8100" />
     <allow-navigation href="http://10.182.68.180:8100" />
     <engine name="browser" spec="~5.0.3" />
     <engine name="android" spec="7.0.0" />
+=======
+<<<<<<< HEAD
+    <allow-navigation href="http://10.182.77.4:8100" />
+    <allow-navigation href="http://10.182.68.180:8100" />
+=======
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+>>>>>>> 19b21d74ec99b3cce6f4808e9e0914cd3548a53d
+>>>>>>> 4a2a8947ec718e82be1e31157c973a7991855f8c
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
@@ -39,4 +48,6 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-bluetooth-serial" spec="^0.4.7" />
+    <engine name="browser" spec="~5.0.3" />
+    <engine name="android" spec="7.0.0" />
 </widget>
