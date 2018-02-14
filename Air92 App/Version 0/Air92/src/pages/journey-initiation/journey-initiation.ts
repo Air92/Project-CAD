@@ -20,16 +20,19 @@ declare var google;
   selector: 'page-journey-initiation',
   templateUrl: 'journey-initiation.html',
 })
-export class JourneyInitiationPage {
-   //store map object
-   map: any;
-   //store user location
-   coord: any = {
-     long: -2.242631,
-     lat: 53.480759
-   }
-   //marker on map
-   marker: any;
+export class JourneyInitiationPage
+{
+
+  makers = [];
+  //store map object
+  map: any;
+  //store user location
+  coord: any = {
+    long: -2.242631,
+    lat: 53.480759
+  }
+
+  watch: any;
   
   StartButton : Element;
   startPause : boolean;
@@ -120,45 +123,94 @@ export class JourneyInitiationPage {
   
   }
 
-  private geoLoc(location : any, callback){
+  addRoute(){
+    var route = new google.maps.DirectionsService;
+    var render = new google.maps.DirectionsRenderer({
+      draggable: false,
+      map: this.map
+    })
     
-    var geoCode = new google.maps.Geocoder();
-      
+  }
 
-      geoCode.geocode({
-        address: location
-      }, function (result, status) {
-        if (status === 'OK') {
-          console.log(result);
-          callback(result[0].place_id);
 
-        }
-        else{
-          callback("error");
-        }
-      });
 
   watchLocate = () =>
   {
     console.log("watching locatation");
 
+    return new Promise((resolve, reject) =>
+    {
+      this.watch = this.geolocation.watchPosition();
+      this.watch.subscribe((data) =>
+      {
+        console.log(data.coords.latitude);
+        console.log(data.coords.longitude);
+
+        var distance = this.distance(this.coord.lat,this.coord.long,data.coords.latitude,data.coords.longitude,"K");
+        console.log(distance);
+        if(distance > 0.05){
+          this.coord.lat = data.coords.latitude;
+          this.coord.long = data.coords.longitude;
+          this.relocate(data.coords.latitude, data.coords.longitude);
+          console.log("distance is greater than 50m");
+        }
+      });
+    })
   }
-  
+
+  startJourney(){
+
+    if(this.startPause){
+      this.StartButton.innerHTML = "Start"
+      this.startPause = false;
+    }else{
+      this.StartButton.innerHTML = "Pause";
+      this.startPause = true;
+    }
+
+  }
 
 
+  //============================================================= Locate ============================================================= 
+  //locates users
+  locateUser = () =>
+  {
+    console.log('user located');
+    return new Promise((resolve, reject) =>
+    {
+      var options = { maximumAge: 0, timeout: 1000000, enableHighAccuracy: true };
+      this.geolocation.getCurrentPosition(options).then((location) =>
+      {
+        console.log('success');
+        this.coord.long = location.coords.longitude;
+        this.coord.lat = location.coords.latitude;
+        resolve(location);
+      }).catch((error) =>
+      {
+        console.log(error);
+      })
+    })
+  }
+  //==================================================================================================================================
 
 
-private mapCreation(): void {
-
-  this.map = new google.maps.Map(document.getElementById("journeyMap"), {
-    center: {
-      lat: this.coord.lat,
-      lng: this.coord.long
-    },
-    zoom: 15,
-    draggable: true,
-    fullscreenControl: false
-  });  
+  //============================================================= MapGen =============================================================
+  //generates map on passed element
+  mapGen = (map: Element) =>
+  {
+    return new Promise((resolve, reject) =>
+    {
+      this.map = new google.maps.Map(map, {
+        center: {
+          lat: this.coord.lat,
+          lng: this.coord.long
+        },
+        zoom: 15,
+        draggable: true,
+        fullscreenControl: false
+      });
+      resolve(map);
+    });
   }
   //==================================================================================================================================
 
