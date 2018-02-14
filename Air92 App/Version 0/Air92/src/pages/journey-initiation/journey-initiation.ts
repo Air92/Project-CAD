@@ -20,7 +20,6 @@ declare var google;
   selector: 'page-journey-initiation',
   templateUrl: 'journey-initiation.html',
 })
-<<<<<<< HEAD
 export class JourneyInitiationPage
 {
 
@@ -34,18 +33,6 @@ export class JourneyInitiationPage
   }
 
   watch: any;
-=======
-export class JourneyInitiationPage {
-   //store map object
-   map: any;
-   //store user location
-   coord: any = {
-     long: -2.242631,
-     lat: 53.480759
-   }
-   //marker on map
-   marker: any;
->>>>>>> a0928ae38e28be104368c0855174d4454dff947e
   
   StartButton : Element;
   startPause : boolean;
@@ -136,7 +123,6 @@ export class JourneyInitiationPage {
   
   }
 
-<<<<<<< HEAD
   addRoute(){
     var route = new google.maps.DirectionsService;
     var render = new google.maps.DirectionsRenderer({
@@ -147,31 +133,11 @@ export class JourneyInitiationPage {
   }
 
 
-=======
-  private geoLoc(location : any, callback){
-    
-    var geoCode = new google.maps.Geocoder();
-      
-
-      geoCode.geocode({
-        address: location
-      }, function (result, status) {
-        if (status === 'OK') {
-          console.log(result);
-          callback(result[0].place_id);
-
-        }
-        else{
-          callback("error");
-        }
-      });
->>>>>>> a0928ae38e28be104368c0855174d4454dff947e
 
   watchLocate = () =>
   {
     console.log("watching locatation");
 
-<<<<<<< HEAD
     return new Promise((resolve, reject) =>
     {
       this.watch = this.geolocation.watchPosition();
@@ -245,25 +211,6 @@ export class JourneyInitiationPage {
       });
       resolve(map);
     });
-=======
-  }
-  
-
-
-
-
-private mapCreation(): void {
-
-  this.map = new google.maps.Map(document.getElementById("journeyMap"), {
-    center: {
-      lat: this.coord.lat,
-      lng: this.coord.long
-    },
-    zoom: 15,
-    draggable: true,
-    fullscreenControl: false
-  });  
->>>>>>> a0928ae38e28be104368c0855174d4454dff947e
   }
   //==================================================================================================================================
 
