@@ -52,7 +52,6 @@ this.bluetoothSerial.write([186, 220, 222]).then((success)=>{
       this.bluetoothSerial.list();
 <<<<<<< HEAD
 =======
-      this.bluetoothSerial.connect(phone);
       this.bluetoothSerial.list();
 >>>>>>> cc6b5558dd05c61b30439a18bafd750bd95def03
 			this.bluetoothSerial.isConnected().then(res => {
