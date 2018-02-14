@@ -26,15 +26,25 @@ export class BluetoothtestPage {
 
   blue()
   {
+ 
+    var devices;
+    //this.isScanning =true;
+    this.bluetoothSerial.isEnabled().then(()=>{
+      this.bluetoothSerial.discoverUnpaired().then((allDevices)=>{
+          devices=allDevices;
+          console.log(devices);
+          //this.isScanning =false;
+      });
+  });
 
-    this.bluetoothSerial.isEnabled().then((result) => {
-      this.bluetoothSerial.list().then((result) => {
-        this.bluetoothSerial.write("test").then((result1) =>{
-          console.log(result1);
-        })
-      })
-    })
-  }
+  //   this.bluetoothSerial.isEnabled().then((result) => {
+  //     this.bluetoothSerial.list().then((result) => {
+  //       this.bluetoothSerial.write("test").then((result1) =>{
+  //         console.log(result1);
+  //       })
+  //     })
+  //   })
+  // }
 }
 
    
@@ -42,5 +52,5 @@ export class BluetoothtestPage {
     //  Write a string
 
   
-
+}
  
