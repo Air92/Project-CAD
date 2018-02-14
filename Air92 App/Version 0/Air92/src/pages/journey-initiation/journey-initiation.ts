@@ -19,7 +19,6 @@ declare var google;
   templateUrl: 'journey-initiation.html',
 })
 export class JourneyInitiationPage {
-
    //store map object
    map: any;
    //store user location
@@ -81,27 +80,30 @@ export class JourneyInitiationPage {
   }
   
 
-  // private geoLoc(location : any, callback){
+  private geoLoc(location : any, callback){
     
-  //   var geoCode = new google.maps.Geocoder();
+    var geoCode = new google.maps.Geocoder();
       
 
-  //     geoCode.geocode({
-  //       address: location
-  //     }, function (result, status) {
-  //       if (status === 'OK') {
-  //         console.log(result);
-  //         callback(result[0].place_id);
+      geoCode.geocode({
+        address: location
+      }, function (result, status) {
+        if (status === 'OK') {
+          console.log(result);
+          callback(result[0].place_id);
 
-  //       }
-  //       else{
-  //         callback("error");
-  //       }
-  //     });
+        }
+        else{
+          callback("error");
+        }
+      });
 
 
-  // }
+  }
   
+
+
+
 
 private mapCreation(): void {
 
