@@ -1,8 +1,8 @@
 page-journey-initiation {
 
-    #StartButton,
-  #PauseButton {
+    #StartButton {
     padding: 3%;
+    width:60%;
    // margin-top: 10%;
     }
 
@@ -20,7 +20,7 @@ page-journey-initiation {
     }
 
     #journeyMap {
-        height: 70%;
+        height: 65%;
         //background-color: #53B4F5;
         margin: 2%;
       }

@@ -60,6 +60,8 @@ export class LocationPage
     this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
     this.buttons.addButton = document.getElementById("addButton");
 
+  
+
     this.locateUser().then((result) =>
     {
       this.mapGen(document.getElementById('map')).then(() =>
@@ -220,7 +222,7 @@ export class LocationPage
     console.log('user located');
     return new Promise((resolve, reject) =>
     {
-      var options = { maximumAge: 0, timeout: 10000, enableHighAccuracy: true };
+      var options = { maximumAge: 0, timeout: 1000000, enableHighAccuracy: true };
       this.geolocation.getCurrentPosition(options).then((location) =>
       {
         console.log('success');
