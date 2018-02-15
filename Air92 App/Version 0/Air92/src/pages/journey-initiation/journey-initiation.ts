@@ -46,6 +46,7 @@ export class JourneyInitiationPage
   {
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
+    this.blue();
     this.watchLocate();
     this.locateUser().then((result) =>
     {
@@ -61,25 +62,27 @@ export class JourneyInitiationPage
 
   // }
 
+  
 
 
-  private Bluetoothtest()
-  {
-    this.bluetoothSerial.isEnabled().then((result) =>
-    {
-      console.log(result);
-      this.bluetoothSerial.connect("00:15:83:0C:BF:RB");
-      this.bluetoothSerial.list().then((result) =>
-      {
-        console.log(result);
-        this.bluetoothSerial.write('hello world').then((result) =>
-        {
-          console.log(result);
-        })
 
-      })
-    })
-  }
+  // private Bluetoothtest()
+  // {
+  //   this.bluetoothSerial.isEnabled().then((result) =>
+  //   {
+  //     console.log(result);
+  //     this.bluetoothSerial.connect("00:15:83:0C:BF:RB");
+  //     this.bluetoothSerial.list().then((result) =>
+  //     {
+  //       console.log(result);
+  //       this.bluetoothSerial.write('hello world').then((result) =>
+  //       {
+  //         console.log(result);
+  //       })
+
+  //     })
+  //   })
+  // }
 
   //============================================================= Marker =============================================================
   //create marker on map
@@ -136,23 +139,23 @@ export class JourneyInitiationPage
 
   watchLocate = () =>
   {
-    console.log("watching locatation");
+  //  console.log("watching locatation");
 
     return new Promise((resolve, reject) =>
     {
       this.watch = this.geolocation.watchPosition();
       this.watch.subscribe((data) =>
       {
-        console.log(data.coords.latitude);
-        console.log(data.coords.longitude);
+       // console.log(data.coords.latitude);
+     //   console.log(data.coords.longitude);
 
         var distance = this.distance(this.coord.lat,this.coord.long,data.coords.latitude,data.coords.longitude,"K");
-        console.log(distance);
+       // console.log(distance);
         if(distance > 0.05){
           this.coord.lat = data.coords.latitude;
           this.coord.long = data.coords.longitude;
           this.relocate(data.coords.latitude, data.coords.longitude);
-          console.log("distance is greater than 50m");
+         // console.log("distance is greater than 50m");
         }
       });
     })
@@ -175,19 +178,19 @@ export class JourneyInitiationPage
   //locates users
   locateUser = () =>
   {
-    console.log('user located');
+  //  console.log('user located');
     return new Promise((resolve, reject) =>
     {
       var options = { maximumAge: 0, timeout: 1000000, enableHighAccuracy: true };
       this.geolocation.getCurrentPosition(options).then((location) =>
       {
-        console.log('success');
+    //    console.log('success');
         this.coord.long = location.coords.longitude;
         this.coord.lat = location.coords.latitude;
         resolve(location);
       }).catch((error) =>
       {
-        console.log(error);
+     //   console.log(error);
       })
     })
   }
@@ -212,6 +215,28 @@ export class JourneyInitiationPage
       resolve(map);
     });
   }
+
+  blue()
+  {
+ 
+    var devices;
+    //this.isScanning =true;
+    this.bluetoothSerial.isEnabled().then(()=>{
+      console.log("enabled");
+      this.bluetoothSerial.discoverUnpaired().then((allDevices)=>{
+        console.log(allDevices)
+          devices=allDevices;
+          this.bluetoothSerial.connectInsecure("b8:27:eb:b8:ed:ba").subscribe((data) =>{
+            console.log(data);
+          });
+          this.bluetoothSerial.isConnected().then((result)=>{
+            console.log(result);
+          });
+          console.log(devices);
+          //this.isScanning =false;
+      });
+  });
   //==================================================================================================================================
 
+}
 }
