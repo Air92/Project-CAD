@@ -4,11 +4,6 @@ page-journey-list {
         width: 100%;
         height: 100%;
     }
-
-    #sideBar{
-        height:100%;
-        width:100%;
-    }
     
     #add{
         width:93%;
@@ -16,31 +11,14 @@ page-journey-list {
         margin-top: 15%;
     }
 
-    #card{
-        height: 30%;
-        position: relative;
-        background: #494947;
+    #title{
+        padding : 5%;
+        color: white;
     }
 
-   #extension{
-       height: 100%;
-   }
-
-   #header{
-       padding: 5%;
-   }
-
-    #locMap{
-        height: 75%;
-        width: 80%;
-    }
 
 }
 
-ion-icon{
-    float: right;
-}
-
-ion-header{
-    z-index: 1 !important;
+ion-card{
+    background: #494947 !important;
 }

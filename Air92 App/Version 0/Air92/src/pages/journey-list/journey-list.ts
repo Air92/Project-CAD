@@ -24,8 +24,9 @@ declare var google;
 
 export class JourneyListPage {
 
+
   extension : any;
-  JourneyList : any;
+  JourneyList : any = [];
   map : any;
 
   
@@ -37,36 +38,7 @@ export class JourneyListPage {
     console.log('ionViewDidLoad JourneyListPage');
     /* this.extension = document.getElementById("extension");
     this.extension.style.visibility = "hidden"; */
-   
-    
-    this.platform.ready().then(() => {
-      this.mapGen(document.getElementById('locMap'));
-      
-
-    });
-  
-
   }
-
-   //============================================================= MapGen =============================================================
-  //generates map on passed element
-  mapGen = (map: Element) =>
-  {
-    return new Promise((resolve, reject) =>
-    {
-      this.map = new google.maps.Map(map, {
-        center: {
-          lat: 53.4717481,
-          lng: -2.2399314
-        },
-        zoom: 15,
-        draggable: true,
-        fullscreenControl: false
-      });
-      resolve(map);
-    });
-  }
-  //==================================================================================================================================
 
   public add(){
     this.navCtrl.push(LocationPage);
@@ -80,11 +52,25 @@ export class JourneyListPage {
   
   ListDisplay(){
     this.getJounreyList().then((result)=> {
-      console.log(result);
-      this.JourneyList = Object.keys(result);
+      var p = result;
+
+      for (var key in p) {
+        this.JourneyList.push(p[key]);
+      }
+
+      for(var test in this.JourneyList){
+        console.log(this.JourneyList[test]);
+      }
     });
     
   }
+
+  itemSelected(item){
+    console.log(item);
+    var Journey = document.getElementById(item.id);
+  }
+
+  
 
   getJounreyList = () =>
   {

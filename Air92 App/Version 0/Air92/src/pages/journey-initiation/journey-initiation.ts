@@ -22,6 +22,7 @@ declare var google;
 })
 export class JourneyInitiationPage
 {
+  
 
   makers = [];
   //store map object
@@ -32,6 +33,7 @@ export class JourneyInitiationPage
     lat: 53.480759
   }
 
+
   watch: any;
   
   StartButton : Element;
@@ -39,11 +41,13 @@ export class JourneyInitiationPage
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private bluetoothSerial: BluetoothSerial)
   {
-
+    //console.dir(usb);
+    
   }
 
   ngAfterViewInit()
   {
+   
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
     this.watchLocate();
@@ -65,6 +69,7 @@ export class JourneyInitiationPage
 
   private Bluetoothtest()
   {
+    
     this.bluetoothSerial.isEnabled().then((result) =>
     {
       console.log(result);
@@ -89,9 +94,9 @@ export class JourneyInitiationPage
       map: this.map,
       visible: true,
       position: new google.maps.LatLng(lat, long),
-      Icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 5
+      icon: {
+        url: "https://png.icons8.com/ios/2x/cloud-filled.png",
+        scaledSize: new google.maps.Size(30,30)
       },
       clickable: false,
       draggable: false
@@ -213,5 +218,36 @@ export class JourneyInitiationPage
     });
   }
   //==================================================================================================================================
+
+  //=============================================================Post Data============================================================
+  //post data to RestLet database 
+  postData = (name: any, start: any, end: any) =>
+  {
+    var param =
+      {
+        "name": name,
+        "startLat": start.lat,
+        "startLong": start.lng,
+        "endLat": end.lat,
+        "endLong": end.lng,
+        "category": "a3c7a200-05bc-11e8-9af9-41fa26177d88"
+      };
+
+    console.log(JSON.stringify(param));
+
+    var url = '192.168.0.1:8000/test';
+    return new Promise(function (resolve, reject)
+    {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      xhr.onload = function ()
+      {
+        resolve(xhr.response);
+      };
+    });
+  }
+//==================================================================================================================================
 
 }

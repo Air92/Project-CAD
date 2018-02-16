@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
 import {JourneyListPage} from '../journey-list/journey-list';
 
+
 /**
  * Generated class for the LocationPage page.
  *
@@ -314,9 +315,6 @@ export class LocationPage
   }
   //==================================================================================================================================
 
-  public test(){
-    this.addRoute();
-  }
 
   //=============================================================Post Data============================================================
   //post data to RestLet database 

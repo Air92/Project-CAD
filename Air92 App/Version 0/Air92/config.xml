@@ -23,7 +23,6 @@
     <preference name="SplashScreenDelay" value="3000" />
     <allow-navigation href="http://10.182.79.48:8100" />
     <allow-navigation href="http://10.182.77.4:8100" />
-    <allow-navigation href="http://10.182.68.180:8100" />
     <engine name="browser" spec="~5.0.3" />
     <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
