@@ -48,6 +48,7 @@ export class JourneyInitiationPage
   ngAfterViewInit()
   {
    
+    this.Bluetoothtest();
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
     this.watchLocate();
@@ -73,7 +74,7 @@ export class JourneyInitiationPage
     this.bluetoothSerial.isEnabled().then((result) =>
     {
       console.log(result);
-      this.bluetoothSerial.connect("00:15:83:0C:BF:RB");
+      this.bluetoothSerial.connect("B8:27:EB:12:47:10ionic ");
       this.bluetoothSerial.list().then((result) =>
       {
         console.log(result);
