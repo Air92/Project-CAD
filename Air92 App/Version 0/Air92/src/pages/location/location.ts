@@ -70,6 +70,9 @@ export class LocationPage
         this.markerCreator(this.coord.lat, this.coord.long);
 
       })
+    }).catch((error) => {
+      console.log(error);
+      document.getElementById('map').innerHTML = "Location Not Found"
     });
 
     this.initAutoComplete();
@@ -208,6 +211,131 @@ export class LocationPage
           lng: this.coord.long
         },
         zoom: 15,
+        styles: [
+          {
+            "featureType": "administrative",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#000000"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#cbcbc9"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.terrain",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#878783"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#333331"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.business",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "stylers": [
+              {
+                "color": "#6fce7c"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#53b4f5"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#000000"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#e9f5fe"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#000040"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#0b75bb"
+              }
+            ]
+          }
+        ],
         draggable: true,
         fullscreenControl: false
       });
@@ -232,7 +360,7 @@ export class LocationPage
         resolve(location);
       }).catch((error) =>
       {
-        console.log(error);
+        reject(error);
       })
     })
   }

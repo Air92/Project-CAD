@@ -24,20 +24,21 @@ declare var google;
 
 export class JourneyListPage {
 
-
+  Journey : any;
   extension : any;
   JourneyList : any = [];
   map : any;
 
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
-     this.ListDisplay();
+    
   }
 
   ngAfterViewInit(){
     console.log('ionViewDidLoad JourneyListPage');
-    /* this.extension = document.getElementById("extension");
-    this.extension.style.visibility = "hidden"; */
+    this.Journey = document.getElementById("JourneyList");
+    this.ListDisplay();
+
   }
 
   public add(){
@@ -54,13 +55,26 @@ export class JourneyListPage {
     this.getJounreyList().then((result)=> {
       var p = result;
 
+      console.log("hit");
       for (var key in p) {
         this.JourneyList.push(p[key]);
       }
 
-      for(var test in this.JourneyList){
+   
+      var cards  = this.Journey.children;
+
+      
+
+      /*for(var test in this.JourneyList){
         console.log(this.JourneyList[test]);
-      }
+      }*/
+
+      console.log("hit2");
+      for (var i = 0; i < cards.length; i++) {
+        console.log(cards[i]);
+    }
+    console
+    
     });
     
   }
