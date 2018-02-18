@@ -11,10 +11,34 @@ page-journey-list {
         margin-top: 15%;
     }
 
-    #title{
+    #header{
         padding : 5%;
         color: white;
+        position: absolute;
+    }
+
+    #title{
+        padding: 4%;
+        margin-bottom: 17%;
+    }
+    
+
+    #JourneyList ion-card{
+        background: #494947;
+
+    }
+
+    #JourneyMap {
+        padding: 50%;
+    }
+
+   
+
+    #button{
+        float: right;
+        margin-top: 3%;
     }
 
 
 }
+

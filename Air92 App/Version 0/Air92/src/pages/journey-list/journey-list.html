@@ -13,20 +13,26 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding id="page">
   
    
 
   
-  <div id="JourneyList">
+  <!-- <div id="JourneyList">
     <ion-card id="{{item.id}}" *ngFor="let item of JourneyList" (click)="itemSelected(item)">
       <h2 id="title">{{item.name}}</h2>
     </ion-card>
   </div>
-     
-       
+ -->
+<div id="JourneyList">
+    <ion-card id="{{item.id}}" *ngFor="let item of JourneyList" (click)="itemSelected(item)">
+      <div id="title"><h1 id="header">{{item.name}}</h1>
+        <button ion-button item-right id="button">Start</button></div>
+      <div id="{{item.id}} Map"></div>
+    </ion-card>
+  </div>
 
-
+  
 
     <button ion-button color="danger" id="add" (click)="add()"><ion-icon name="add-circle"></ion-icon></button>
 </ion-content>
