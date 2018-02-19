@@ -22,9 +22,6 @@ declare var google;
 })
 
 
-
-
-
 export class JourneyListPage {
   @ViewChild(Content) content: Content;
   extension : any;

@@ -25,8 +25,8 @@
   </div>
  -->
 <div id="JourneyList">
-    <ion-card id="{{item.id}}" *ngFor="let item of JourneyList" (click)="itemSelected(item)">
-      <div id="title"><h1 id="header">{{item.name}}</h1>
+    <ion-card id="{{item.id}}" *ngFor="let item of JourneyList">
+      <div id="title"  (click)="itemSelected(item)"><h1 id="header">{{item.name}}</h1>
         <button ion-button item-right id="button">Start</button></div>
       <div id="{{item.id}} Map"></div>
     </ion-card>

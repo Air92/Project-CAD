@@ -122,7 +122,11 @@ export class JourneyInitiationPage
   }
 
   relocate(lat : any, long : any){
-    this.map.setCenter(new google.maps.LatLng(lat,long));
+    console.log("set center: " + lat + "  " + long);
+    this.map.setCenter({
+      lat: lat,
+      lng: long
+    },);
     if(this.startPause){
       this.markerCreator(lat, long);
     }
@@ -159,6 +163,7 @@ export class JourneyInitiationPage
           this.coord.long = data.coords.longitude;
           this.relocate(data.coords.latitude, data.coords.longitude);
           console.log("distance is greater than 50m");
+          this.postData();
         }
       });
     })
@@ -347,21 +352,10 @@ export class JourneyInitiationPage
 
   //=============================================================Post Data============================================================
   //post data to RestLet database 
-  postData = (name: any, start: any, end: any) =>
+  postData = () =>
   {
-    var param =
-      {
-        "name": name,
-        "startLat": start.lat,
-        "startLong": start.lng,
-        "endLat": end.lat,
-        "endLong": end.lng,
-        "category": "a3c7a200-05bc-11e8-9af9-41fa26177d88"
-      };
 
-    console.log(JSON.stringify(param));
-
-    var url = '192.168.0.1:8000/test';
+    var url = 'localhost/index';
     return new Promise(function (resolve, reject)
     {
       var xhr = new XMLHttpRequest();
@@ -370,6 +364,7 @@ export class JourneyInitiationPage
 
       xhr.onload = function ()
       {
+        console.log(xhr.response);
         resolve(xhr.response);
       };
     });
