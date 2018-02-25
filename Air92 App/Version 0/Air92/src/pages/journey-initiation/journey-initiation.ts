@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import {HTTP} from '@ionic-native/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+import { Vibration } from '@ionic-native/vibration';
+
 
 
 /**
@@ -39,7 +41,7 @@ export class JourneyInitiationPage
   StartButton : Element;
   startPause : boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private bluetoothSerial: BluetoothSerial)
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private bluetoothSerial: BluetoothSerial, private vibration: Vibration)
   {
     //console.dir(usb);
     
@@ -56,9 +58,14 @@ export class JourneyInitiationPage
     {
       this.mapGen(document.getElementById('journeyMap')).then(() =>
       {
-        this.markerCreator(this.coord.lat, this.coord.long);
+       
+        var startAddress = this.navParams.get("startAddress");
+        var endAddress = this.navParams.get("endAddress");
+        this.addRoute(startAddress,endAddress);
       })
     });
+
+    this.bluetoothTest();
   }
 
   // ionViewDidLoad() {
@@ -128,18 +135,10 @@ export class JourneyInitiationPage
       lng: long
     },);
     if(this.startPause){
+      this.vibration.vibrate(800);
       this.markerCreator(lat, long);
     }
   
-  }
-
-  addRoute(){
-    var route = new google.maps.DirectionsService;
-    var render = new google.maps.DirectionsRenderer({
-      draggable: false,
-      map: this.map
-    })
-    
   }
 
 
@@ -158,11 +157,12 @@ export class JourneyInitiationPage
 
         var distance = this.distance(this.coord.lat,this.coord.long,data.coords.latitude,data.coords.longitude,"K");
         console.log(distance);
-        if(distance > 0.05){
+        if(distance > 0.1){
           this.coord.lat = data.coords.latitude;
           this.coord.long = data.coords.longitude;
           this.relocate(data.coords.latitude, data.coords.longitude);
           console.log("distance is greater than 50m");
+         
           this.postData();
         }
       });
@@ -170,7 +170,6 @@ export class JourneyInitiationPage
   }
 
   startJourney(){
-
     if(this.startPause){
       this.StartButton.innerHTML = "Start"
       this.startPause = false;
@@ -204,6 +203,55 @@ export class JourneyInitiationPage
   }
   //==================================================================================================================================
 
+  private addRoute(startAddress : any, endAddress: any)
+  {
+      var route = new google.maps.DirectionsService;
+      var render = new google.maps.DirectionsRenderer({
+        draggable: false,
+        map: this.map
+      });
+
+
+      var start = new google.maps.LatLng(startAddress.lat,startAddress.long );
+      var end = new google.maps.LatLng(endAddress.lat,endAddress.long);
+
+      this.renderRoute(route, render, start, end);
+       
+  }
+  //==================================================================================================================================
+
+  //============================================================= Render ============================================================= 
+  //Renders route on map
+  private renderRoute(route: any, render: any, start: any, end: any): void
+  {
+    console.log("hit");
+    route.route(({
+      destination: end,
+      origin: start,
+      travelMode: 'WALKING'
+    }), function (response, status)
+      {
+        console.log(status);
+        if (status === 'OK')
+        {
+          render.setDirections(response);
+        }
+      });
+
+      this.markerCreator(this.coord.lat, this.coord.long);
+
+  }
+  //==================================================================================================================================
+
+  bluetoothTest(){
+    //00:15:83:0C:BF:E8
+    //this.bluetoothSerial.setDiscoverable(9999);
+   
+    this.bluetoothSerial.write('hello world').then((success) =>{
+
+      console.log(success);
+    }) ;
+  }
 
   //============================================================= MapGen =============================================================
   //generates map on passed element
@@ -355,6 +403,7 @@ export class JourneyInitiationPage
   postData = () =>
   {
 
+    //192.168.0.1
     var url = 'localhost/index';
     return new Promise(function (resolve, reject)
     {
@@ -370,5 +419,8 @@ export class JourneyInitiationPage
     });
   }
 //==================================================================================================================================
+
+
+
 
 }

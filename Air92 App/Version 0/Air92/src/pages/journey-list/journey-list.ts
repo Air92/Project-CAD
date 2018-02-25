@@ -27,6 +27,8 @@ export class JourneyListPage {
   extension : any;
   JourneyList : any = [];
   map : any;
+  options: any;
+  journeySelected : any;
 
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
@@ -36,7 +38,7 @@ export class JourneyListPage {
   ngAfterViewInit(){
     console.log('ionViewDidLoad JourneyListPage');
     this.ListDisplay();
-   
+   this.options = document.getElementById("options");
 
   }
 
@@ -54,22 +56,27 @@ export class JourneyListPage {
     this.getJounreyList().then((result)=> {
       var p = result;
 
-      console.log("hit");
       for (var key in p) {
         this.JourneyList.push(p[key]);
       }
     });
-
-   
-    
   }
 
-  itemSelected(item){
-    console.log(item);
-    var map = document.getElementById(item.id + " Map");
+  itemPressed(item , event){
+    this.options.style.left = event.center.x +"px";
+    this.options.style.top = event.center.y +"px";
+    this.options.style.visibility = "visible";
+    this.options.style.height = "20%";
+  }
 
+  itemSelected(item, event){
+    var map = document.getElementById(item.id + " Map");
     if(map.style.padding != "50%"){
       map.style.padding = "50%";
+      this.content.scrollTo(event.screenX,event.screenY);
+
+      console.log(event);
+      
      
     }else{
       map.style.padding = "0%";
@@ -288,6 +295,23 @@ export class JourneyListPage {
       };
       xhr.send();
     });
+  }
+
+  startJourney(item){
+    var startAddress= {
+      lat: item.startLat,
+      long: item.startLong
+    }
+
+    var endAddress= {
+      lat : item.endLat,
+      long : item.endLong
+    }
+   this.navCtrl.push(JourneyInitiationPage,{
+      startAddress,
+      endAddress
+    });
+
   }
 
 }

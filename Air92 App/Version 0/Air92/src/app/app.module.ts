@@ -36,6 +36,13 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
  * npm install --save @ionic-native/bluetooth-serial
  */
 
+import { Vibration } from '@ionic-native/vibration';
+/**
+ * ionic cordova plugin add cordova-plugin-vibration
+ * npm install --save @ionic-native/vibration
+ */
+
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicPageModule } from 'ionic-angular/module';
@@ -86,6 +93,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     Toast,
     BluetoothSerial,
     AndroidPermissions,
+    Vibration,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

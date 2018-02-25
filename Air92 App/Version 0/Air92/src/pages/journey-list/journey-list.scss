@@ -37,6 +37,26 @@ page-journey-list {
     #button{
         float: right;
         margin-top: 3%;
+        z-index: 300;
+    }
+
+    #options{
+        position: absolute;
+        width: 30%;
+        height: 1%;
+        background: #ffffff;
+        transition: 300ms ease-out !important;
+        visibility: hidden;
+        z-index: 500
+    }
+
+    #options *{
+        width: 100%;
+        height: 30%;
+        background: #6E0D25;
+        padding: 7%;
+        padding-left: 30%;
+        color: #ffffff;
     }
 
 
