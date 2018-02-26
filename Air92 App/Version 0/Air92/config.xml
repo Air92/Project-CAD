@@ -44,4 +44,7 @@
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-bluetooth-serial" spec="^0.4.7" />
     <plugin name="cordova-plugin-vibration" spec="^3.0.1" />
+    <plugin name="cordova-plugin-ble-central" spec="^1.1.4">
+        <variable name="BLUETOOTH_USAGE_DESCRIPTION" value=" " />
+    </plugin>
 </widget>

@@ -42,6 +42,11 @@ import { Vibration } from '@ionic-native/vibration';
  * npm install --save @ionic-native/vibration
  */
 
+import { BLE } from '@ionic-native/ble';
+/**
+ * ionic cordova plugin add cordova-plugin-ble-central
+ * npm install --save @ionic-native/ble
+ */
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -94,6 +99,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     BluetoothSerial,
     AndroidPermissions,
     Vibration,
+    BLE,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import {HTTP} from '@ionic-native/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+import { BLE } from '@ionic-native/ble'
 import { Vibration } from '@ionic-native/vibration';
 
 
@@ -24,7 +25,7 @@ declare var google;
 })
 export class JourneyInitiationPage
 {
-  
+
 
   makers = [];
   //store map object
@@ -37,19 +38,19 @@ export class JourneyInitiationPage
 
 
   watch: any;
-  
-  StartButton : Element;
-  startPause : boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private bluetoothSerial: BluetoothSerial, private vibration: Vibration)
+  StartButton: Element;
+  startPause: boolean;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private ble: BLE, private vibration: Vibration)
   {
     //console.dir(usb);
-    
+
   }
 
   ngAfterViewInit()
   {
-   
+
     this.Bluetoothtest();
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
@@ -58,14 +59,12 @@ export class JourneyInitiationPage
     {
       this.mapGen(document.getElementById('journeyMap')).then(() =>
       {
-       
+
         var startAddress = this.navParams.get("startAddress");
         var endAddress = this.navParams.get("endAddress");
-        this.addRoute(startAddress,endAddress);
+        this.addRoute(startAddress, endAddress);
       })
     });
-
-    this.bluetoothTest();
   }
 
   // ionViewDidLoad() {
@@ -77,21 +76,29 @@ export class JourneyInitiationPage
 
   private Bluetoothtest()
   {
-    
-    this.bluetoothSerial.isEnabled().then((result) =>
-    {
-      console.log(result);
-      this.bluetoothSerial.connect("B8:27:EB:12:47:10ionic ");
-      this.bluetoothSerial.list().then((result) =>
+    var laptop = "b8:81:98:9b:8a:6a"
+    console.log("Start Bluetooth Scan")
+    this.ble.scan([], 10).subscribe(
+      device =>
       {
-        console.log(result);
-        this.bluetoothSerial.write('hello world').then((result) =>
-        {
-          console.log(result);
-        })
+        console.log("Found device: " + JSON.stringify(device));
+      },
+      err =>
+      {
+        console.log("Error occurred during BLE scan: " + JSON.stringify(err));
+      },
+      () =>
+      {
+        console.log("End Devices");
+      }
+    );
 
-      })
-    })
+    this.ble.connect(laptop).subscribe(
+      device =>{
+        console.log(device);
+
+      }
+    )
   }
 
   //============================================================= Marker =============================================================
@@ -104,7 +111,7 @@ export class JourneyInitiationPage
       position: new google.maps.LatLng(lat, long),
       icon: {
         url: "https://png.icons8.com/ios/2x/cloud-filled.png",
-        scaledSize: new google.maps.Size(30,30)
+        scaledSize: new google.maps.Size(30, 30)
       },
       clickable: false,
       draggable: false
@@ -128,17 +135,19 @@ export class JourneyInitiationPage
     return dist
   }
 
-  relocate(lat : any, long : any){
+  relocate(lat: any, long: any)
+  {
     console.log("set center: " + lat + "  " + long);
     this.map.setCenter({
       lat: lat,
       lng: long
-    },);
-    if(this.startPause){
+    }, );
+    if (this.startPause)
+    {
       this.vibration.vibrate(800);
       this.markerCreator(lat, long);
     }
-  
+
   }
 
 
@@ -155,25 +164,29 @@ export class JourneyInitiationPage
         console.log(data.coords.latitude);
         console.log(data.coords.longitude);
 
-        var distance = this.distance(this.coord.lat,this.coord.long,data.coords.latitude,data.coords.longitude,"K");
+        var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
         console.log(distance);
-        if(distance > 0.1){
+        if (distance > 0.1)
+        {
           this.coord.lat = data.coords.latitude;
           this.coord.long = data.coords.longitude;
           this.relocate(data.coords.latitude, data.coords.longitude);
           console.log("distance is greater than 50m");
-         
+
           this.postData();
         }
       });
     })
   }
 
-  startJourney(){
-    if(this.startPause){
+  startJourney()
+  {
+    if (this.startPause)
+    {
       this.StartButton.innerHTML = "Start"
       this.startPause = false;
-    }else{
+    } else
+    {
       this.StartButton.innerHTML = "Pause";
       this.startPause = true;
     }
@@ -203,20 +216,20 @@ export class JourneyInitiationPage
   }
   //==================================================================================================================================
 
-  private addRoute(startAddress : any, endAddress: any)
+  private addRoute(startAddress: any, endAddress: any)
   {
-      var route = new google.maps.DirectionsService;
-      var render = new google.maps.DirectionsRenderer({
-        draggable: false,
-        map: this.map
-      });
+    var route = new google.maps.DirectionsService;
+    var render = new google.maps.DirectionsRenderer({
+      draggable: false,
+      map: this.map
+    });
 
 
-      var start = new google.maps.LatLng(startAddress.lat,startAddress.long );
-      var end = new google.maps.LatLng(endAddress.lat,endAddress.long);
+    var start = new google.maps.LatLng(startAddress.lat, startAddress.long);
+    var end = new google.maps.LatLng(endAddress.lat, endAddress.long);
 
-      this.renderRoute(route, render, start, end);
-       
+    this.renderRoute(route, render, start, end);
+
   }
   //==================================================================================================================================
 
@@ -238,20 +251,10 @@ export class JourneyInitiationPage
         }
       });
 
-      this.markerCreator(this.coord.lat, this.coord.long);
+    this.markerCreator(this.coord.lat, this.coord.long);
 
   }
   //==================================================================================================================================
-
-  bluetoothTest(){
-    //00:15:83:0C:BF:E8
-    //this.bluetoothSerial.setDiscoverable(9999);
-   
-    this.bluetoothSerial.write('hello world').then((success) =>{
-
-      console.log(success);
-    }) ;
-  }
 
   //============================================================= MapGen =============================================================
   //generates map on passed element
@@ -265,7 +268,7 @@ export class JourneyInitiationPage
           lng: this.coord.long
         },
         zoom: 15,
-        styles:[
+        styles: [
           {
             "featureType": "administrative",
             "elementType": "labels.text.fill",
@@ -418,7 +421,7 @@ export class JourneyInitiationPage
       };
     });
   }
-//==================================================================================================================================
+  //==================================================================================================================================
 
 
 
