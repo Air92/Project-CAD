@@ -51,7 +51,20 @@ export class JourneyInitiationPage
   ngAfterViewInit()
   {
 
-    this.Bluetoothtest();
+    this.BluetoothFind().then((result) =>
+    {
+      this.BluetoothConnect(result).then((result) =>
+      {
+
+      }).catch((error) =>
+      {
+
+      })
+
+    }).catch((error) =>
+    {
+
+    });
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
     this.watchLocate();
@@ -73,32 +86,80 @@ export class JourneyInitiationPage
   // }
 
 
-
-  private Bluetoothtest()
+  private stringToBytes(string)
   {
-    var laptop = "b8:81:98:9b:8a:6a"
-    console.log("Start Bluetooth Scan")
-    this.ble.scan([], 10).subscribe(
-      device =>
-      {
-        console.log("Found device: " + JSON.stringify(device));
-      },
-      err =>
-      {
-        console.log("Error occurred during BLE scan: " + JSON.stringify(err));
-      },
-      () =>
-      {
-        console.log("End Devices");
-      }
-    );
+    var array = new Uint8Array(string.length);
+    for (var i = 0, l = string.length; i < l; i++)
+    {
+      array[i] = string.charCodeAt(i);
+    }
+    return array.buffer;
+  }
 
-    this.ble.connect(laptop).subscribe(
-      device =>{
-        console.log(device);
+  private BluetoothWrite(deviceID: string, serviceUUID: string, characUUID: string, data: ArrayBuffer)
+  {
+    this.ble.write(deviceID, serviceUUID, characUUID, data).then((reuslt) =>
+    {
+      console.log(reuslt);
 
-      }
-    )
+    }).catch((error) =>
+    {
+      console.log(error)
+    });
+
+  }
+
+
+  private BluetoothFind = () =>
+  {
+    return new Promise((resolve, reject) =>
+    {
+
+      var laptop = "b8:81:98:9b:8a:6a"
+      console.log("Start Bluetooth Scan")
+      this.ble.startScan([]).subscribe(
+        device =>
+        {
+          console.log("Found device: " + JSON.stringify(device));
+          if (device.id = "B8:27:EB:12:47:10")
+          {
+            this.ble.stopScan();
+            resolve(device.id);
+          }
+        },
+        err =>
+        {
+          reject("BLE scan failed" + JSON.stringify(err));
+          console.log("Error occurred during BLE scan: " + JSON.stringify(err));
+        },
+        () =>
+        {
+          console.log("End Devices");
+        }
+      );
+
+    })
+  }
+
+  private BluetoothConnect = (id) =>
+  {
+    return new Promise((resolve, reject) =>
+    {
+      this.ble.connect(id).subscribe(
+        device =>
+        {
+          console.log(device)
+          resolve(device)
+        },
+        err =>
+        {
+          console.log("Connection failed" + JSON.stringify(err));
+          reject("Connection failed" + JSON.stringify(err));
+
+        }
+      );
+
+    })
   }
 
   //============================================================= Marker =============================================================
@@ -137,7 +198,7 @@ export class JourneyInitiationPage
 
   relocate(lat: any, long: any)
   {
-    console.log("set center: " + lat + "  " + long);
+    //console.log("set center: " + lat + "  " + long);
     this.map.setCenter({
       lat: lat,
       lng: long
@@ -154,24 +215,24 @@ export class JourneyInitiationPage
 
   watchLocate = () =>
   {
-    console.log("watching locatation");
+    //console.log("watching locatation");
 
     return new Promise((resolve, reject) =>
     {
       this.watch = this.geolocation.watchPosition();
       this.watch.subscribe((data) =>
       {
-        console.log(data.coords.latitude);
-        console.log(data.coords.longitude);
+        //console.log(data.coords.latitude);
+        //console.log(data.coords.longitude);
 
         var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
-        console.log(distance);
+        //console.log(distance);
         if (distance > 0.1)
         {
           this.coord.lat = data.coords.latitude;
           this.coord.long = data.coords.longitude;
           this.relocate(data.coords.latitude, data.coords.longitude);
-          console.log("distance is greater than 50m");
+          //console.log("distance is greater than 50m");
 
           this.postData();
         }
@@ -198,19 +259,19 @@ export class JourneyInitiationPage
   //locates users
   locateUser = () =>
   {
-    console.log('user located');
+    //console.log('user located');
     return new Promise((resolve, reject) =>
     {
       var options = { maximumAge: 0, timeout: 1000000, enableHighAccuracy: true };
       this.geolocation.getCurrentPosition(options).then((location) =>
       {
-        console.log('success');
+        //console.log('success');
         this.coord.long = location.coords.longitude;
         this.coord.lat = location.coords.latitude;
         resolve(location);
       }).catch((error) =>
       {
-        console.log(error);
+        //console.log(error);
       })
     })
   }
@@ -237,14 +298,14 @@ export class JourneyInitiationPage
   //Renders route on map
   private renderRoute(route: any, render: any, start: any, end: any): void
   {
-    console.log("hit");
+    //console.log("hit");
     route.route(({
       destination: end,
       origin: start,
       travelMode: 'WALKING'
     }), function (response, status)
       {
-        console.log(status);
+        //console.log(status);
         if (status === 'OK')
         {
           render.setDirections(response);
@@ -416,7 +477,7 @@ export class JourneyInitiationPage
 
       xhr.onload = function ()
       {
-        console.log(xhr.response);
+        //console.log(xhr.response);
         resolve(xhr.response);
       };
     });
