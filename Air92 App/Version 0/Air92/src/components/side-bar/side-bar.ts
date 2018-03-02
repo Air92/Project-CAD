@@ -15,14 +15,17 @@ import { NavController } from 'ionic-angular';
 })
 export class SideBarComponent {
 
-  Pages : string[] = ["Page1","Page2"];
+  Pages : string[] = ["Journies","Credits", "Settings","Analysis"];
   SideBar : any;
   
 
   constructor(public navCtrl: NavController, private renderer: Renderer) {
 
     
+    
   }
+
+  
 
   ngAfterViewInit(){
     

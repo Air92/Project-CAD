@@ -13,10 +13,25 @@
 </ion-header>
 
 
-<ion-content padding>
-    <side-bar #sideBar></side-bar>
+<ion-content padding id="page">
+  <side-bar #sideBar></side-bar>
+  
 
-    <div (swipe)="sideBar.toggle()" id="page">
-    </div>
+<div (swipe)="sideBar.toggle()" id="page">
+  
+<div id="options">
+  <div>Delete</div>
+</div>
+<ion-list id="JourneyList">
+    <ion-card id="{{item.id}}" *ngFor="let item of JourneyList" (press)="itemPressed(item,$event)">
+      <div id="title"  (click)="itemSelected(item,$event)"><h1 id="header">{{item.name}}</h1>
+        <button ion-button item-right id="button" (click)="startJourney(item)">Start</button></div>
+      <div id="{{item.id}} Map"></div>
+    </ion-card>
+</ion-list>
 
+  
+
+    <button ion-button color="danger" id="add" (click)="add()"><ion-icon name="add-circle"></ion-icon></button>
+  </div>
 </ion-content>

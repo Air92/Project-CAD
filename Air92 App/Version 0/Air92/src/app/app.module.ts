@@ -9,6 +9,8 @@ import {LocationPage} from '../pages/location/location';
 import {JourneyInitiationPage} from '../pages/journey-initiation/journey-initiation';
 import {LoginPage} from '../pages/login/login';
 import {JourneyListPage} from '../pages/journey-list/journey-list';
+import {RegisterPage} from '../pages/register/register';
+import { CreditsPage } from '../pages/credits/credits';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
@@ -28,12 +30,31 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
  * npm install --save @ionic-native/android-permissions
  */
 
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
+/**
+ * ionic cordova plugin add cordova-plugin-bluetooth-serial
+ * npm install --save @ionic-native/bluetooth-serial
+ */
+
+import { Vibration } from '@ionic-native/vibration';
+/**
+ * ionic cordova plugin add cordova-plugin-vibration
+ * npm install --save @ionic-native/vibration
+ */
+
+import { BLE } from '@ionic-native/ble';
+/**
+ * ionic cordova plugin add cordova-plugin-ble-central
+ * npm install --save @ionic-native/ble
+ */
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicPageModule } from 'ionic-angular/module';
 
 import { SideBarComponent } from '../components/side-bar/side-bar';
+
+
 
 
 
@@ -46,7 +67,9 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     SideBarComponent,
     JourneyInitiationPage,
     LoginPage,
-    JourneyListPage
+    JourneyListPage,
+    RegisterPage,
+    CreditsPage
 
 
   ],
@@ -63,7 +86,9 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     LocationPage,
     JourneyInitiationPage,
     LoginPage,
-    JourneyListPage
+    JourneyListPage,
+    RegisterPage,
+    CreditsPage
   ],
   providers: [
     StatusBar,
@@ -71,7 +96,11 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     Geolocation,
     HTTP,
     Toast,
+    BluetoothSerial,
     AndroidPermissions,
+    Vibration,
+    BLE,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
   

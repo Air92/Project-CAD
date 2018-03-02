@@ -5,6 +5,8 @@ import { HTTP } from '@ionic-native/http';
 import { Toast } from '@ionic-native/toast';
 import { HomePage } from '../home/home';
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
+import {JourneyListPage} from '../journey-list/journey-list';
+
 
 /**
  * Generated class for the LocationPage page.
@@ -52,29 +54,28 @@ export class LocationPage
 
   ngAfterViewInit()
   {
+    console.log('page ready');
+    //get input elements, get the first tag within the ion-input tag
+    this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
+    this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
+    this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
+    this.buttons.addButton = document.getElementById("addButton");
 
-    console.log('location page')
-    this.platform.ready().then(() =>
+  
+
+    this.locateUser().then((result) =>
     {
-      console.log('page ready');
-      //get input elements, get the first tag within the ion-input tag
-      this.searches.startSearch = document.getElementById("startSearch").getElementsByTagName('input')[0];
-      this.searches.endSearch = document.getElementById("endSearch").getElementsByTagName('input')[0];
-      this.searches.name = document.getElementById("Journey").getElementsByTagName('input')[0];
-      this.buttons.addButton = document.getElementById("addButton");
-
-      this.locateUser().then((result) =>
+      this.mapGen(document.getElementById('map')).then(() =>
       {
-        this.mapGen(document.getElementById('map')).then(() =>
-        {
-          this.markerCreator(this.coord.lat, this.coord.long);
+        this.markerCreator(this.coord.lat, this.coord.long);
 
-        })
-      });
-
-      this.initAutoComplete();
-
+      })
+    }).catch((error) => {
+      console.log(error);
+      document.getElementById('map').innerHTML = "Location Not Found"
     });
+
+    this.initAutoComplete();
   }
 
   public checkFocus()
@@ -198,6 +199,7 @@ export class LocationPage
   //==================================================================================================================================
 
 
+  
   //============================================================= MapGen =============================================================
   //generates map on passed element
   mapGen = (map: Element) =>
@@ -210,6 +212,131 @@ export class LocationPage
           lng: this.coord.long
         },
         zoom: 15,
+        styles: [
+          {
+            "featureType": "administrative",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#000000"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#cbcbc9"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural.terrain",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#878783"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#333331"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.business",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "stylers": [
+              {
+                "color": "#6fce7c"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#53b4f5"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#000000"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#e9f5fe"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#000040"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#0b75bb"
+              }
+            ]
+          }
+        ],
         draggable: true,
         fullscreenControl: false
       });
@@ -225,7 +352,7 @@ export class LocationPage
     console.log('user located');
     return new Promise((resolve, reject) =>
     {
-      var options = { maximumAge: 0, timeout: 10000, enableHighAccuracy: true };
+      var options = { maximumAge: 0, timeout: 1000000, enableHighAccuracy: true };
       this.geolocation.getCurrentPosition(options).then((location) =>
       {
         console.log('success');
@@ -234,7 +361,7 @@ export class LocationPage
         resolve(location);
       }).catch((error) =>
       {
-        console.log(error);
+        reject(error);
       })
     })
   }
@@ -272,7 +399,7 @@ export class LocationPage
   //cancel journey pop from nav stack
   cancelJourney(): void
   {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(JourneyListPage);
   }
   //==================================================================================================================================
 

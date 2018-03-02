@@ -23,7 +23,7 @@
 
     <ion-item>
       <ion-label stacked>End Location</ion-label>
-      <ion-input (ionFocus)="addRoute()" id="endSearch"></ion-input>
+      <ion-input (ionBlur)="addRoute()" id="endSearch"></ion-input>      
     </ion-item>
 
     <button ion-button color="danger" id="DeleteButton" (click)="cancelJourney()">Cancel</button>
