@@ -23,13 +23,9 @@
     <preference name="SplashScreenDelay" value="3000" />
     <allow-navigation href="http://10.182.79.48:8100" />
     <allow-navigation href="http://10.182.77.4:8100" />
-    <engine name="browser" spec="~5.0.3" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <allow-navigation href="http://10.182.77.4:8100" />
     <allow-navigation href="http://10.182.68.180:8100" />
-    <engine name="browser" spec="~5.0.3" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
@@ -47,4 +43,6 @@
     <plugin name="cordova-plugin-ble-central" spec="^1.1.4">
         <variable name="BLUETOOTH_USAGE_DESCRIPTION" value=" " />
     </plugin>
+    <engine name="browser" spec="~5.0.3" />
+    <engine name="android" spec="7.0.0" />
 </widget>

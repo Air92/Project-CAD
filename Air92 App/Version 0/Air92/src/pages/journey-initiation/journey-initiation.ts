@@ -55,6 +55,18 @@ export class JourneyInitiationPage
     {
       this.BluetoothConnect(result).then((result) =>
       {
+        var str = "hello"
+        var buf = new ArrayBuffer(str.length * 2);
+
+        buf[0] = 12;
+        var bufView = new Uint16Array(buf);
+        
+        for (var i = 0, strLen = str.length; i < strLen; i++)
+        {
+          bufView[i] = str.charCodeAt(i);
+        }
+
+        this.BluetoothWrite("B8:27:EB:12:47:10", "12ab", "34cd", bufView.buffer);
 
       }).catch((error) =>
       {
@@ -98,9 +110,11 @@ export class JourneyInitiationPage
 
   private BluetoothWrite(deviceID: string, serviceUUID: string, characUUID: string, data: ArrayBuffer)
   {
-    this.ble.write(deviceID, serviceUUID, characUUID, data).then((reuslt) =>
+
+    this.ble.read(deviceID, serviceUUID, characUUID).then((result) =>
     {
-      console.log(reuslt);
+      console.log(String.fromCharCode.apply(null, new Uint16Array(result)));
+    
 
     }).catch((error) =>
     {
@@ -121,8 +135,9 @@ export class JourneyInitiationPage
         device =>
         {
           console.log("Found device: " + JSON.stringify(device));
-          if (device.id = "B8:27:EB:12:47:10")
+          if (device.id == "B8:27:EB:12:47:10")
           {
+            console.log("Found Air92" + device.id)
             this.ble.stopScan();
             resolve(device.id);
           }
