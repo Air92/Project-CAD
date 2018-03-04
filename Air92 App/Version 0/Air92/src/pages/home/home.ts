@@ -4,11 +4,8 @@ import { LocationPage } from '../location/location';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { LoginPage } from '../login/login';
 import { JourneyListPage} from '../journey-list/journey-list';
-<<<<<<< HEAD
-=======
 import { RegisterPage} from '../register/register';
 import { CreditsPage } from '../credits/credits';
->>>>>>> e93c5bed0b2418379739b0a112d189dfe0ff8a00
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
 
 
@@ -70,12 +67,10 @@ export class HomePage
     this.navCtrl.push(JourneyListPage);
   }
 
-<<<<<<< HEAD
   // journeyInitiation()
   // {
   //   this.navCtrl.push(JourneyInitiationPage);
   // }
-=======
   public credits(){
     this.navCtrl.push(CreditsPage);
   }
@@ -88,6 +83,5 @@ export class HomePage
   {
     //this.navCtrl.push(BluetoothtestPage);
   }
->>>>>>> e93c5bed0b2418379739b0a112d189dfe0ff8a00
 
 }

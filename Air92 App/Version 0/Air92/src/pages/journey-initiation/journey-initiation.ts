@@ -18,6 +18,7 @@ import { Vibration } from '@ionic-native/vibration';
 declare var google;
 
 
+
 @IonicPage()
 @Component({
   selector: 'page-journey-initiation',
@@ -25,7 +26,6 @@ declare var google;
 })
 export class JourneyInitiationPage
 {
-
 
   makers = [];
   //store map object
@@ -41,6 +41,10 @@ export class JourneyInitiationPage
 
   StartButton: Element;
   startPause: boolean;
+
+  FirstTime : boolean = true;
+
+  LocationMarker : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private ble: BLE, private vibration: Vibration)
   {
@@ -80,16 +84,7 @@ export class JourneyInitiationPage
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
     this.watchLocate();
-    this.locateUser().then((result) =>
-    {
-      this.mapGen(document.getElementById('journeyMap')).then(() =>
-      {
-
-        var startAddress = this.navParams.get("startAddress");
-        var endAddress = this.navParams.get("endAddress");
-        this.addRoute(startAddress, endAddress);
-      })
-    });
+  
   }
 
   // ionViewDidLoad() {
@@ -113,7 +108,11 @@ export class JourneyInitiationPage
 
     this.ble.read(deviceID, serviceUUID, characUUID).then((result) =>
     {
-      console.log(String.fromCharCode.apply(null, new Uint16Array(result)));
+      console.log(result);
+      console.log(String.fromCharCode.apply(null, new Uint8Array(result)));
+
+      
+      
     
 
     }).catch((error) =>
@@ -171,102 +170,6 @@ export class JourneyInitiationPage
           console.log("Connection failed" + JSON.stringify(err));
           reject("Connection failed" + JSON.stringify(err));
 
-<<<<<<< HEAD
-   //store map object
-   map: any;
-   //store user location
-   coord: any = {
-     long: -2.242631,
-     lat: 53.480759
-   }
-   //marker on map
-   marker: any;
-  
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation,) {
-   
-  }
-
-  ngAfterViewInit() {
-  
-    
-    this.onLocateUser();
-      }
-    
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad JourneyInitiationPage');
-    
-  // }
-
-  private onLocateUser(): void {
-    this.geolocation.getCurrentPosition()
-      .then((location) => {
-        console.log('sucess');
-        var location = location;
-
-        this.coord.long = location.coords.longitude;
-        this.coord.lat = location.coords.latitude;
-
-        this.mapCreation();
-
-        this.marker = new google.maps.Marker({
-          map: this.map,
-          visible: true,
-          position: new google.maps.LatLng(this.coord.lat, this.coord.long),
-          Icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 5
-          },
-          clickable: false,
-          draggable: false
-        })
-
-
-
-      })
-      .catch((error) => {
-        console.log('Error getting location', error);
-      });
-
-
-
-  }
-  
-
-  // private geoLoc(location : any, callback){
-    
-  //   var geoCode = new google.maps.Geocoder();
-      
-
-  //     geoCode.geocode({
-  //       address: location
-  //     }, function (result, status) {
-  //       if (status === 'OK') {
-  //         console.log(result);
-  //         callback(result[0].place_id);
-
-  //       }
-  //       else{
-  //         callback("error");
-  //       }
-  //     });
-
-
-  // }
-  
-
-private mapCreation(): void {
-
-  this.map = new google.maps.Map(document.getElementById("journeyMap"), {
-    center: {
-      lat: this.coord.lat,
-      lng: this.coord.long
-    },
-    zoom: 15,
-    draggable: true,
-    fullscreenControl: false
-  });  
-=======
         }
       );
 
@@ -281,6 +184,7 @@ private mapCreation(): void {
       map: this.map,
       visible: true,
       position: new google.maps.LatLng(lat, long),
+      animation: google.maps.Animation.DROP,
       icon: {
         url: "https://png.icons8.com/ios/2x/cloud-filled.png",
         scaledSize: new google.maps.Size(30, 30)
@@ -291,6 +195,22 @@ private mapCreation(): void {
   }
   //==================================================================================================================================
 
+
+  locationMarker(lat: any, long: any)
+  {
+    this.LocationMarker = new google.maps.Marker({
+      map: this.map,
+      visible: true,
+      position: new google.maps.LatLng(lat, long),
+      animation: google.maps.Animation.BOUNCE,
+      Icon: {
+        path: "marker.png",
+        scale: 5
+      },
+      clickable: false,
+      draggable: false
+    })
+  }
 
   distance(lat1, lon1, lat2, lon2, unit)
   {
@@ -324,18 +244,25 @@ private mapCreation(): void {
 
 
 
-  watchLocate = () =>
+  watchLocate()
   {
-    //console.log("watching locatation");
-
-    return new Promise((resolve, reject) =>
-    {
       this.watch = this.geolocation.watchPosition();
       this.watch.subscribe((data) =>
       {
-        //console.log(data.coords.latitude);
-        //console.log(data.coords.longitude);
 
+        if(this.FirstTime){
+          this.coord.lat = data.coords.latitude;
+          this.coord.long = data.coords.longitude;
+          this.mapGen(document.getElementById('journeyMap'));
+          this.locationMarker(this.coord.lat,this.coord.long);
+          var startAddress = this.navParams.get("startAddress");
+          var endAddress = this.navParams.get("endAddress");
+          this.addRoute(startAddress, endAddress);
+          this.FirstTime = false;
+
+        }
+
+        this.LocationMarker.setPosition(new google.maps.LatLng(data.coords.latitude,data.coords.longitude));
         var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
         //console.log(distance);
         if (distance > 0.1)
@@ -348,7 +275,6 @@ private mapCreation(): void {
           this.postData();
         }
       });
-    })
   }
 
   startJourney()
@@ -385,7 +311,6 @@ private mapCreation(): void {
         //console.log(error);
       })
     })
->>>>>>> e93c5bed0b2418379739b0a112d189dfe0ff8a00
   }
   //==================================================================================================================================
 
@@ -578,8 +503,6 @@ private mapCreation(): void {
   //post data to RestLet database 
   postData = () =>
   {
-
-    //192.168.0.1
     var url = 'localhost/index';
     return new Promise(function (resolve, reject)
     {
@@ -595,8 +518,5 @@ private mapCreation(): void {
     });
   }
   //==================================================================================================================================
-
-
-
 
 }
