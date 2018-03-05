@@ -42,9 +42,9 @@ export class JourneyInitiationPage
   StartButton: Element;
   startPause: boolean;
 
-  FirstTime : boolean = true;
+  FirstTime: boolean = true;
 
-  LocationMarker : any;
+  LocationMarker: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private ble: BLE, private vibration: Vibration)
   {
@@ -55,22 +55,13 @@ export class JourneyInitiationPage
   ngAfterViewInit()
   {
 
+    this.FirstTime = true;
     this.BluetoothFind().then((result) =>
     {
       this.BluetoothConnect(result).then((result) =>
       {
-        var str = "hello"
-        var buf = new ArrayBuffer(str.length * 2);
 
-        buf[0] = 12;
-        var bufView = new Uint16Array(buf);
-        
-        for (var i = 0, strLen = str.length; i < strLen; i++)
-        {
-          bufView[i] = str.charCodeAt(i);
-        }
-
-        this.BluetoothWrite("B8:27:EB:12:47:10", "12ab", "34cd", bufView.buffer);
+        this.SensorData();
 
       }).catch((error) =>
       {
@@ -84,7 +75,7 @@ export class JourneyInitiationPage
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
     this.watchLocate();
-  
+
   }
 
   // ionViewDidLoad() {
@@ -93,33 +84,41 @@ export class JourneyInitiationPage
   // }
 
 
-  private stringToBytes(string)
+  private SensorData()
   {
-    var array = new Uint8Array(string.length);
-    for (var i = 0, l = string.length; i < l; i++)
+    var count = 2;
+    while (count > 0)
     {
-      array[i] = string.charCodeAt(i);
+      (this.BluetoothWrite("B8:27:EB:12:47:10", "12ab", "34cd")).then((data) =>
+      {
+        console.log("Data " + data);
+        
+        
+      }).catch((error) =>{
+        console.log(error);
+      });
+
+      console.log("The count is at " + count)
+      count = count - 1;
     }
-    return array.buffer;
+    console.log("Done Reading")
   }
 
-  private BluetoothWrite(deviceID: string, serviceUUID: string, characUUID: string, data: ArrayBuffer)
+
+  private BluetoothWrite = (deviceID: string, serviceUUID: string, characUUID: string) =>
   {
-
-    this.ble.read(deviceID, serviceUUID, characUUID).then((result) =>
+    return new Promise((resolve, reject) =>
     {
-      console.log(result);
-      console.log(String.fromCharCode.apply(null, new Uint8Array(result)));
 
-      
-      
-    
+      this.ble.read(deviceID, serviceUUID, characUUID).then((result) =>
+      {
+        resolve(String.fromCharCode.apply(null, new Uint8Array(result)));
+      }).catch((error) =>
+      {
+        reject(error);
 
-    }).catch((error) =>
-    {
-      console.log(error)
-    });
-
+      });
+    })
   }
 
 
@@ -202,10 +201,9 @@ export class JourneyInitiationPage
       map: this.map,
       visible: true,
       position: new google.maps.LatLng(lat, long),
-      animation: google.maps.Animation.BOUNCE,
       Icon: {
-        path: "marker.png",
-        scale: 5
+        url: "https://image.ibb.co/g1aiXn/marker.png",
+        scaledSize: new google.maps.Size(30, 30)
       },
       clickable: false,
       draggable: false
@@ -242,39 +240,40 @@ export class JourneyInitiationPage
 
   }
 
-
-
   watchLocate()
   {
-      this.watch = this.geolocation.watchPosition();
-      this.watch.subscribe((data) =>
+    this.watch = this.geolocation.watchPosition();
+    this.watch.subscribe((data) =>
+    {
+
+      if (this.FirstTime)
       {
+        this.coord.lat = data.coords.latitude;
+        this.coord.long = data.coords.longitude;
+        this.mapGen(document.getElementById('journeyMap'));
+        this.locationMarker(this.coord.lat, this.coord.long);
+        var startAddress = this.navParams.get("startAddress");
+        var endAddress = this.navParams.get("endAddress");
+        this.addRoute(startAddress, endAddress);
+        this.FirstTime = false;
 
-        if(this.FirstTime){
-          this.coord.lat = data.coords.latitude;
-          this.coord.long = data.coords.longitude;
-          this.mapGen(document.getElementById('journeyMap'));
-          this.locationMarker(this.coord.lat,this.coord.long);
-          var startAddress = this.navParams.get("startAddress");
-          var endAddress = this.navParams.get("endAddress");
-          this.addRoute(startAddress, endAddress);
-          this.FirstTime = false;
+      }
 
-        }
+      console.log(data);
 
-        this.LocationMarker.setPosition(new google.maps.LatLng(data.coords.latitude,data.coords.longitude));
-        var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
-        //console.log(distance);
-        if (distance > 0.1)
-        {
-          this.coord.lat = data.coords.latitude;
-          this.coord.long = data.coords.longitude;
-          this.relocate(data.coords.latitude, data.coords.longitude);
-          //console.log("distance is greater than 50m");
+      this.LocationMarker.setPosition(new google.maps.LatLng(data.coords.latitude, data.coords.longitude));
+      var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
+      //console.log(distance);
+      if (distance > 0.1)
+      {
+        this.coord.lat = data.coords.latitude;
+        this.coord.long = data.coords.longitude;
+        this.relocate(data.coords.latitude, data.coords.longitude);
+        //console.log("distance is greater than 50m");
 
-          this.postData();
-        }
-      });
+        this.postData();
+      }
+    });
   }
 
   startJourney()
@@ -290,29 +289,6 @@ export class JourneyInitiationPage
     }
 
   }
-
-
-  //============================================================= Locate ============================================================= 
-  //locates users
-  locateUser = () =>
-  {
-    //console.log('user located');
-    return new Promise((resolve, reject) =>
-    {
-      var options = { maximumAge: 0, timeout: 1000000, enableHighAccuracy: true };
-      this.geolocation.getCurrentPosition(options).then((location) =>
-      {
-        //console.log('success');
-        this.coord.long = location.coords.longitude;
-        this.coord.lat = location.coords.latitude;
-        resolve(location);
-      }).catch((error) =>
-      {
-        //console.log(error);
-      })
-    })
-  }
-  //==================================================================================================================================
 
   private addRoute(startAddress: any, endAddress: any)
   {
