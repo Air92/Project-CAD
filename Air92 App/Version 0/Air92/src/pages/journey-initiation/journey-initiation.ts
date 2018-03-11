@@ -78,31 +78,62 @@ export class JourneyInitiationPage
 
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad JourneyInitiationPage');
-
-  // }
-
 
   private SensorData()
   {
-    var count = 2;
-    while (count > 0)
-    {
-      (this.BluetoothWrite("B8:27:EB:12:47:10", "12ab", "34cd")).then((data) =>
-      {
-        console.log("Data " + data);
-        
-        
-      }).catch((error) =>{
-        console.log(error);
-      });
 
-      console.log("The count is at " + count)
-      count = count - 1;
-    }
+
+    this.BluetoothWrite("B8:27:EB:12:47:10", "12ab", "34cd").then((result) =>
+    {
+      var data = result.toString();
+      console.log(data);
+      this.DecodeData(data);
+    });
+
     console.log("Done Reading")
   }
+
+  private DecodeData(data: string)
+  {
+    var SensData = data.split('.');
+
+    this.postData(parseFloat(SensData[0]),parseFloat(SensData[1]),parseFloat(SensData[2]),parseFloat(SensData[3]));
+    
+  }
+
+  //=============================================================Post Data============================================================
+  //post data to RestLet database 
+  postData = (temp: number, humid : number, pat : number, gas : number) =>
+  {
+    var param =
+      {
+        "longitude": this.coord.long,
+        "latitude": this.coord.lat,
+        "journey": this.navParams.get("id"),
+        "time": "11.11",
+        "temperature": temp,
+        "humidity": humid,
+        "particleDensity": pat,
+        "gasDensity": gas
+      };
+
+    console.log(JSON.stringify(param));
+
+    var url = 'https://air92.restlet.net/v1/sensorPointses/';
+    return new Promise(function (resolve, reject)
+    {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      xhr.onload = function ()
+      {
+        resolve(xhr.response);
+      };
+      xhr.send(JSON.stringify(param));
+    });
+  }
+  //==================================================================================================================================
 
 
   private BluetoothWrite = (deviceID: string, serviceUUID: string, characUUID: string) =>
@@ -110,6 +141,7 @@ export class JourneyInitiationPage
     return new Promise((resolve, reject) =>
     {
 
+      console.log("read");
       this.ble.read(deviceID, serviceUUID, characUUID).then((result) =>
       {
         resolve(String.fromCharCode.apply(null, new Uint8Array(result)));
@@ -133,7 +165,7 @@ export class JourneyInitiationPage
         device =>
         {
           console.log("Found device: " + JSON.stringify(device));
-          if (device.id == "B8:27:EB:12:47:10")
+          if (device.id == "B8:27:EB:12:47:10" || device.name == "Air92")
           {
             console.log("Found Air92" + device.id)
             this.ble.stopScan();
@@ -156,9 +188,10 @@ export class JourneyInitiationPage
 
   private BluetoothConnect = (id) =>
   {
+    console.log("trying to connect");
     return new Promise((resolve, reject) =>
     {
-      this.ble.connect(id).subscribe(
+      this.ble.connect("B8:27:EB:12:47:10").subscribe(
         device =>
         {
           console.log(device)
@@ -262,6 +295,11 @@ export class JourneyInitiationPage
       console.log(data);
 
       this.LocationMarker.setPosition(new google.maps.LatLng(data.coords.latitude, data.coords.longitude));
+
+      if(this.distance(this.coord.lat,this.coord.long,this.navParams.get("endAddress").lat,this.navParams.get("endAddress").long, "K") < 0.5){
+        console.log("Journey Finished");
+      }
+
       var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
       //console.log(distance);
       if (distance > 0.1)
@@ -270,8 +308,8 @@ export class JourneyInitiationPage
         this.coord.long = data.coords.longitude;
         this.relocate(data.coords.latitude, data.coords.longitude);
         //console.log("distance is greater than 50m");
-
-        this.postData();
+        this.SensorData();
+        //this.postData();
       }
     });
   }
@@ -475,24 +513,5 @@ export class JourneyInitiationPage
   }
   //==================================================================================================================================
 
-  //=============================================================Post Data============================================================
-  //post data to RestLet database 
-  postData = () =>
-  {
-    var url = 'localhost/index';
-    return new Promise(function (resolve, reject)
-    {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.setRequestHeader("Content-type", "application/json");
-
-      xhr.onload = function ()
-      {
-        //console.log(xhr.response);
-        resolve(xhr.response);
-      };
-    });
-  }
-  //==================================================================================================================================
 
 }

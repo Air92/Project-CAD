@@ -376,8 +376,8 @@ export class LocationPage
       visible: true,
       position: new google.maps.LatLng(lat, long),
       Icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 5
+        url: "https://image.ibb.co/g1aiXn/marker.png",
+        scaledSize: new google.maps.Size(30,30)
       },
       clickable: false,
       draggable: false

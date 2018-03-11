@@ -298,6 +298,7 @@ export class JourneyListPage {
   }
 
   startJourney(item){
+    console.log(item);
     var startAddress= {
       lat: item.startLat,
       long: item.startLong
@@ -309,7 +310,8 @@ export class JourneyListPage {
     }
    this.navCtrl.push(JourneyInitiationPage,{
       startAddress,
-      endAddress
+      endAddress,
+      id:item.id
     });
 
   }
