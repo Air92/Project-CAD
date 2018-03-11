@@ -1,3 +1,21 @@
 page-analysis {
 
+    #GasChart, #AreaChart, #TemperatureChart{
+        margin-bottom: 20%;
+    }
+
+    #Score{
+        width: 85%;
+        height: 10%;
+        background: #494947;
+        margin-left: 9%;
+        padding: 5%;
+        margin-bottom: 5%;
+       
+    }
+
+    #Score h1{
+        color: #FFFFFF !important;
+    }
+
 }

@@ -7,6 +7,7 @@ import { JourneyListPage} from '../journey-list/journey-list';
 import { RegisterPage} from '../register/register';
 import { CreditsPage } from '../credits/credits';
 import { JourneyInitiationPage } from '../journey-initiation/journey-initiation';
+import { AnalysisPage} from '../analysis/analysis'
 
 
 @Component({
@@ -82,6 +83,10 @@ export class HomePage
   bluetooth()
   {
     //this.navCtrl.push(BluetoothtestPage);
+  }
+
+  AnalysisPage(){
+    this.navCtrl.push( AnalysisPage);
   }
 
 }

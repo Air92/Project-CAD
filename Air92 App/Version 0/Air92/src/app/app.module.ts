@@ -11,7 +11,7 @@ import {LoginPage} from '../pages/login/login';
 import {JourneyListPage} from '../pages/journey-list/journey-list';
 import {RegisterPage} from '../pages/register/register';
 import { CreditsPage } from '../pages/credits/credits';
-
+import { AnalysisPage} from '../pages/analysis/analysis';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HTTP } from '@ionic-native/http';
 /**
@@ -69,8 +69,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     LoginPage,
     JourneyListPage,
     RegisterPage,
-    CreditsPage
-
+    CreditsPage,
+    AnalysisPage
 
   ],
   imports: [
@@ -88,7 +88,8 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     LoginPage,
     JourneyListPage,
     RegisterPage,
-    CreditsPage
+    CreditsPage,
+    AnalysisPage
   ],
   providers: [
     StatusBar,
