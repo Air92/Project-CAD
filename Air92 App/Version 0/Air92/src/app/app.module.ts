@@ -48,6 +48,10 @@ import { BLE } from '@ionic-native/ble';
  * npm install --save @ionic-native/ble
  */
 
+import { BackgroundMode } from '@ionic-native/background-mode';
+/* ionic cordova plugin add cordova-plugin-background-mode
+npm install --save @ionic-native/background-mode
+ */
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicPageModule } from 'ionic-angular/module';
@@ -101,6 +105,7 @@ import { SideBarComponent } from '../components/side-bar/side-bar';
     AndroidPermissions,
     Vibration,
     BLE,
+    BackgroundMode,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

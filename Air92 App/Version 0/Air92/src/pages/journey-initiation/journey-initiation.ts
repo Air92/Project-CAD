@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { BLE } from '@ionic-native/ble'
 import { Vibration } from '@ionic-native/vibration';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 
 
@@ -46,7 +47,7 @@ export class JourneyInitiationPage
 
   LocationMarker: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private ble: BLE, private vibration: Vibration)
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private ble: BLE, private vibration: Vibration, private backgroundMode: BackgroundMode)
   {
     //console.dir(usb);
 
@@ -55,13 +56,18 @@ export class JourneyInitiationPage
   ngAfterViewInit()
   {
 
+    this.backgroundMode.setDefaults({
+      title: "Air 92",
+      text: "Data is being collected",
+    });
+    this.backgroundMode.enable();
     this.FirstTime = true;
     this.BluetoothFind().then((result) =>
     {
       this.BluetoothConnect(result).then((result) =>
       {
 
-        this.SensorData();
+        //this.SensorData();
 
       }).catch((error) =>
       {
@@ -81,9 +87,7 @@ export class JourneyInitiationPage
 
   private SensorData()
   {
-
-
-    this.BluetoothWrite("B8:27:EB:12:47:10", "12ab", "34cd").then((result) =>
+    this.BluetoothRead("B8:27:EB:12:47:10", "12ab", "34cd").then((result) =>
     {
       var data = result.toString();
       console.log(data);
@@ -97,13 +101,12 @@ export class JourneyInitiationPage
   {
     var SensData = data.split('.');
 
-    this.postData(parseFloat(SensData[0]),parseFloat(SensData[1]),parseFloat(SensData[2]),parseFloat(SensData[3]));
-    
+    this.postData(parseFloat(SensData[0]), parseFloat(SensData[1]), parseFloat(SensData[2]), parseFloat(SensData[3]));
   }
 
   //=============================================================Post Data============================================================
   //post data to RestLet database 
-  postData = (temp: number, humid : number, pat : number, gas : number) =>
+  postData = (temp: number, humid: number, pat: number, gas: number) =>
   {
     var param =
       {
@@ -136,7 +139,7 @@ export class JourneyInitiationPage
   //==================================================================================================================================
 
 
-  private BluetoothWrite = (deviceID: string, serviceUUID: string, characUUID: string) =>
+  private BluetoothRead = (deviceID: string, serviceUUID: string, characUUID: string) =>
   {
     return new Promise((resolve, reject) =>
     {
@@ -290,14 +293,42 @@ export class JourneyInitiationPage
         this.addRoute(startAddress, endAddress);
         this.FirstTime = false;
 
+        if (this.ble.isConnected)
+        {
+          this.SensorData;
+        } else
+        {
+
+          this.BluetoothFind().then((result) =>
+          {
+            this.BluetoothConnect(result).then((result) =>
+            {
+
+              this.SensorData();
+
+            }).catch((error) =>
+            {
+
+            })
+
+          }).catch((error) =>
+          {
+
+          });
+
+        }
+
       }
 
       console.log(data);
 
       this.LocationMarker.setPosition(new google.maps.LatLng(data.coords.latitude, data.coords.longitude));
 
-      if(this.distance(this.coord.lat,this.coord.long,this.navParams.get("endAddress").lat,this.navParams.get("endAddress").long, "K") < 0.5){
+      if (this.distance(this.coord.lat, this.coord.long, this.navParams.get("endAddress").lat, this.navParams.get("endAddress").long, "K") < 0.5)
+      {
         console.log("Journey Finished");
+        this.ble.disconnect;
+        this.backgroundMode.disable();
       }
 
       var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
@@ -307,9 +338,31 @@ export class JourneyInitiationPage
         this.coord.lat = data.coords.latitude;
         this.coord.long = data.coords.longitude;
         this.relocate(data.coords.latitude, data.coords.longitude);
-        //console.log("distance is greater than 50m");
-        this.SensorData();
-        //this.postData();
+        if (this.ble.isConnected)
+        {
+          this.backgroundMode.wakeUp();
+          this.SensorData;
+        } else
+        {
+
+          this.BluetoothFind().then((result) =>
+          {
+            this.BluetoothConnect(result).then((result) =>
+            {
+
+              this.SensorData();
+
+            }).catch((error) =>
+            {
+
+            })
+
+          }).catch((error) =>
+          {
+
+          });
+
+        }
       }
     });
   }
