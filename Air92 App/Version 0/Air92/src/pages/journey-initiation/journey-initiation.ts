@@ -37,6 +37,7 @@ export class JourneyInitiationPage
     lat: 53.480759
   }
 
+  header : any;
 
   watch: any;
 
@@ -60,13 +61,13 @@ export class JourneyInitiationPage
       title: "Air 92",
       text: "Data is being collected",
     });
-    this.backgroundMode.enable();
+    //this.backgroundMode.enable();
     this.FirstTime = true;
     this.BluetoothFind().then((result) =>
     {
       this.BluetoothConnect(result).then((result) =>
       {
-
+         this.watchLocate();
         //this.SensorData();
 
       }).catch((error) =>
@@ -80,17 +81,20 @@ export class JourneyInitiationPage
     });
     this.startPause = true;
     this.StartButton = document.getElementById('StartButton')
-    this.watchLocate();
+    this.header = document.getElementById("results");
 
   }
 
 
-  private SensorData()
+  private GetSensorData()
   {
+
+    console.log("Trying to Read");
     this.BluetoothRead("B8:27:EB:12:47:10", "12ab", "34cd").then((result) =>
     {
       var data = result.toString();
       console.log(data);
+      this.header.innerHTML = data;
       this.DecodeData(data);
     });
 
@@ -99,7 +103,7 @@ export class JourneyInitiationPage
 
   private DecodeData(data: string)
   {
-    var SensData = data.split('.');
+    var SensData = data.split(',');
 
     this.postData(parseFloat(SensData[0]), parseFloat(SensData[1]), parseFloat(SensData[2]), parseFloat(SensData[3]));
   }
@@ -292,32 +296,8 @@ export class JourneyInitiationPage
         var endAddress = this.navParams.get("endAddress");
         this.addRoute(startAddress, endAddress);
         this.FirstTime = false;
-
-        if (this.ble.isConnected)
-        {
-          this.SensorData;
-        } else
-        {
-
-          this.BluetoothFind().then((result) =>
-          {
-            this.BluetoothConnect(result).then((result) =>
-            {
-
-              this.SensorData();
-
-            }).catch((error) =>
-            {
-
-            })
-
-          }).catch((error) =>
-          {
-
-          });
-
-        }
-
+        this.GetSensorData();
+        console.log("first time");
       }
 
       console.log(data);
@@ -328,7 +308,7 @@ export class JourneyInitiationPage
       {
         console.log("Journey Finished");
         this.ble.disconnect;
-        this.backgroundMode.disable();
+        //this.backgroundMode.disable();
       }
 
       var distance = this.distance(this.coord.lat, this.coord.long, data.coords.latitude, data.coords.longitude, "K");
@@ -338,31 +318,9 @@ export class JourneyInitiationPage
         this.coord.lat = data.coords.latitude;
         this.coord.long = data.coords.longitude;
         this.relocate(data.coords.latitude, data.coords.longitude);
-        if (this.ble.isConnected)
-        {
-          this.backgroundMode.wakeUp();
-          this.SensorData;
-        } else
-        {
-
-          this.BluetoothFind().then((result) =>
-          {
-            this.BluetoothConnect(result).then((result) =>
-            {
-
-              this.SensorData();
-
-            }).catch((error) =>
-            {
-
-            })
-
-          }).catch((error) =>
-          {
-
-          });
-
-        }
+      
+          //this.backgroundMode.wakeUp();
+          this.GetSensorData();
       }
     });
   }
