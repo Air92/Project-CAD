@@ -25,42 +25,33 @@ To delpoy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberry
 * [**Red LED**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-led-red-com04054p)
 * [**Blue LED**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-led-blue)
 
-Installing Node
-
-Download Node from https://nodejs.org/en/download/ for you OS
-Test Node
-```
-node --version
-```
-
-Install Cordova 
-```
-npm install -g cordova
-cordova --version
-```
-
-Install Angular
-```
-npm install angular
-```
 
 ### Installing
+To install the packages you will need ```npm```, which come with ``Node`` installation 
+Installing Node
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
+#### Node
+Download Node from https://nodejs.org/en/download/ for you OS
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+sudo node --version
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+#### Cordova 
+```
+sudo npm install -g cordova
+sudo cordova --version
+```
+
+#### Angular
+```
+sudo npm install angular
+```
+
+#### Ionic
+```
+sudo npm install -g ionic
+```
+
 
 ## Deployment
 
