@@ -2,6 +2,8 @@
 
 The project is to allow people to see how much pollution people are come into contact with their daily commutes to and from work or other journeys. The reasoning behind this project to is ensure people are aware of the effects of pollution as people don't pay as much attention to negative effects. 
 
+<img src="https://github.com/Air92/Project-CAD/blob/master/Air92%20Images/IMG-20180418-WA0003.jpg" width="648.4" height="458.5" align="middle"/>
+
 # Getting Started
 
 These instructions will get you a copy of the project up and running on your Raspberry Pi, phone and backend for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
