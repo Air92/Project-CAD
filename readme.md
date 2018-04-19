@@ -21,6 +21,9 @@ To delpoy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberry
 * [**Light Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-light-sensor-sen11302p)
 
 #### Additional Equitment 
+* [**LCD RGB Backlight**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/grove-lcd-rgb-backlight)
+* [**Red LED**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-led-red-com04054p)
+* [**Blue LED**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-led-blue)
 
 Installing Node
 
