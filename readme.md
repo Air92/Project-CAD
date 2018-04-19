@@ -13,7 +13,8 @@ To delpoy the application you will need [**Node**](https://nodejs.org/en/), [**C
 
 #### Sensors
 To delpoy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
-The sensors you will need are: 
+
+The sensors you will need are: [**Mulitchannel Gas Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/grove-multichannel-gas-sensor), [**DFRobot PM2.5 laser dust sensor**](https://www.dfrobot.com/product-1272.html) , [**Temperature&Humidity Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/grove-temperature-and-humidity-sensor-high-accuracy-and-mini),[**Light Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-light-sensor-sen11302p)
 
 Installing Node
 
