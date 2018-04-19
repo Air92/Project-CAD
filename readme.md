@@ -8,7 +8,9 @@ These instructions will get you a copy of the project up and running on your Ras
 
 ### Prerequisites
 
-What things you need to install, the hardware you need to configure and how to install them.
+To delpoy the application you will need [**Node**](https://nodejs.org/en/), [**Cordova**](https://evothings.com/doc/build/cordova-install-windows.html), [**Angular**](https://www.npmjs.com/package/angular) and [**Ionic**](https://ionicframework.com/docs/v1/guide/installation.html).
+
+To delpoy the sensors 
 
 Installing Node
 
