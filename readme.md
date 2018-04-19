@@ -15,6 +15,7 @@ To deploy the application you will need [**Node**](https://nodejs.org/en/), [**C
 To deploy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
 
 #### Sensors
+* [**Grove Pi Board**](https://www.amazon.com/seeed-studio-FBA_Seeedstudio-103010002-Seeedstudio-GrovePi/dp/B01ANDPDQE/ref=sr_1_1_sspa?ie=UTF8&qid=1524067653&sr=8-1-spons&keywords=grovepi%2B&psc=1&pldnSite=1)
 * [**Mulitchannel Gas Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/grove-multichannel-gas-sensor)
 * [**DFRobot PM2.5 laser dust sensor**](https://www.dfrobot.com/product-1272.html)
 * [**Temperature&Humidity Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/grove-temperature-and-humidity-sensor-high-accuracy-and-mini)
@@ -63,6 +64,8 @@ Once Rasbian is installed [**Grove Drivers**]() need to be installed.
 sudo curl -kL dexterindustries.com/update_grovepi | bash
 sudo reboot
 ```
+
+Attach the Grove Sensors corresponding to the diagram below.
 
 ## Deployment
 
