@@ -1,6 +1,6 @@
 # Project D: Polluted - Air92
 
-One Paragraph of project description goes here
+The project is to allow people to see how much pollution people are come into contact with their daily commutes to and from work or other journeys. The reasoning behind this project to is ensure people are aware of the effects of pollution as people don't pay as much attention to negative effects. 
 
 # Getting Started
 
@@ -102,7 +102,7 @@ First you have to create a Apple Provisioning Profile
 
 * [Ionic](https://ionicframework.com/)
 * [Visual Studio Code](https://code.visualstudio.com/)
-* 
+
 
 ## Authors
 
