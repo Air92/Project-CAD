@@ -75,12 +75,26 @@ Attach the Grove Sensors corresponding to the diagram below.
 ## Deployment
 
 ### Application
-
+#### Android
 To deploy the application open the ```cmd``` (windows) or ```terminal``` (linux) and navigate to ```Project-CAD/Air92 App/Version 0/Air92/src/```
 
 Connect android phone to Computer and [***Enable Debugging***](https://www.embarcadero.com/starthere/xe5/mobdevsetup/android/en/enabling_usb_debugging_on_an_android_device.html)
+ 
+Then run ```ionic cordova run android --device```
 
-Lastly run ```ionic cordova run android --device```
+#### IOS
+First you have to create a Apple Provisioning Profile
+
+**Using an Apple ID**
+* Open Xcode preferences (Xcode > Preferences…)
+* Click the ‘Accounts’ tab
+* Login with your Apple ID (+ > Add Apple ID…)
+
+**Running Your App**
+* Run a production build of your app with ionic cordova build ios --prod
+* Open the .xcodeproj file in platforms/ios/ in Xcode
+* Connect your phone via USB and select it as the run target
+* Click the play button in Xcode to try to run your app
 
 ## Built With
 
