@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your Ras
 ### Prerequisites
 
 #### Application
-To delpoy the application you will need [**Node**](https://nodejs.org/en/), [**Cordova**](https://evothings.com/doc/build/cordova-install-windows.html), [**Angular**](https://www.npmjs.com/package/angular) and [**Ionic**](https://ionicframework.com/docs/v1/guide/installation.html).
+To delpoy the application you will need [**Node**](https://nodejs.org/en/), [**Cordova**](https://evothings.com/doc/build/cordova-install-windows.html), [**Angular**](https://www.npmjs.com/package/angular) and [**Ionic**](https://ionicframework.com/docs/intro/installation/).
 
 #### Raspberry Pi
 To delpoy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
