@@ -29,8 +29,8 @@ To deploy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberry
 
 ## Installing
 ### Application
-To install the application packages you will need ```npm```, which come with ``Node`` installation 
-Installing Node
+To install the application packages you will need ```npm```, comes with ``Node`` installation 
+
 
 #### Node
 Download Node from https://nodejs.org/en/download/ for you OS
