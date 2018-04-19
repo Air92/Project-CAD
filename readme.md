@@ -74,7 +74,13 @@ Attach the Grove Sensors corresponding to the diagram below.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+### Application
+
+To deploy the application open the ```cmd``` (windows) or ```terminal``` (linux) and navigate to ```Project-CAD/Air92 App/Version 0/Air92/src/```
+
+Connect android phone to Computer and [***Enable Debugging***](https://www.embarcadero.com/starthere/xe5/mobdevsetup/android/en/enabling_usb_debugging_on_an_android_device.html)
+
+Lastly run ```ionic cordova run android --device```
 
 ## Built With
 
