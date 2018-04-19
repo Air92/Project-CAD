@@ -69,7 +69,7 @@ sudo reboot
 Attach the Grove Sensors corresponding to the diagram below.
 
 
-![Grove Sensors Attachment](https://github.com/Air92/Project-CAD/blob/master/Air92%20Images/sensorguide.jpg =300x300)
+![Grove Sensors Attachment](https://github.com/Air92/Project-CAD/blob/master/Air92%20Images/sensorguide.jpg | width=100)
 
 
 ## Deployment
