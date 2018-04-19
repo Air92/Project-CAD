@@ -2,17 +2,17 @@
 
 One Paragraph of project description goes here
 
-## Getting Started
+# Getting Started
 
 These instructions will get you a copy of the project up and running on your Raspberry Pi, phone and backend for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
 #### Application
-To delpoy the application you will need [**Node**](https://nodejs.org/en/), [**Cordova**](https://evothings.com/doc/build/cordova-install-windows.html), [**Angular**](https://www.npmjs.com/package/angular) and [**Ionic**](https://ionicframework.com/docs/intro/installation/).
+To deploy the application you will need [**Node**](https://nodejs.org/en/), [**Cordova**](https://evothings.com/doc/build/cordova-install-windows.html), [**Angular**](https://www.npmjs.com/package/angular) and [**Ionic**](https://ionicframework.com/docs/intro/installation/).
 
 #### Raspberry Pi
-To delpoy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
+To deploy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/).
 
 #### Sensors
 * [**Mulitchannel Gas Sensor**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/grove-multichannel-gas-sensor)
@@ -26,32 +26,43 @@ To delpoy the sensors you will need a [**Raspberry Pi 3**](https://www.raspberry
 * [**Blue LED**](https://www.modmypi.com/raspberry-pi/sensors-1061/grove-sensors-1099/dexter--grovepi-led-blue)
 
 
-### Installing
-To install the packages you will need ```npm```, which come with ``Node`` installation 
+## Installing
+### Application
+To install the application packages you will need ```npm```, which come with ``Node`` installation 
 Installing Node
 
 #### Node
 Download Node from https://nodejs.org/en/download/ for you OS
 ```
-sudo node --version
+node --version
 ```
 
 #### Cordova 
 ```
-sudo npm install -g cordova
-sudo cordova --version
+npm install -g cordova
+cordova --version
 ```
 
 #### Angular
 ```
-sudo npm install angular
+npm install angular
 ```
 
 #### Ionic
 ```
-sudo npm install -g ionic
+npm install -g ionic
 ```
 
+### Sensors
+First install the latest version of [**Rasbian OS**](https://www.raspberrypi.org/documentation/installation/installing-images/) onto the Raspberry Pi.
+
+Once Rasbian is installed [**Grove Drivers**]() need to be installed.
+
+#### Grove Drivers
+```
+sudo curl -kL dexterindustries.com/update_grovepi | bash
+sudo reboot
+```
 
 ## Deployment
 
