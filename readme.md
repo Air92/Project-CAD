@@ -96,13 +96,13 @@ First you have to create a Apple Provisioning Profile
 * Connect your phone via USB and select it as the run target
 * Click the play button in Xcode to try to run your app
 
+### Sensors
+
 ## Built With
 
-* [Android Studio](https://developer.android.com/studio/install.html) - The IDE used to develop the app
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://google.com) for details on our code of conduct, and the process for submitting pull requests to us.
+* [Ionic](https://ionicframework.com/)
+* [Visual Studio Code](https://code.visualstudio.com/)
+* 
 
 ## Authors
 
@@ -121,7 +121,4 @@ This project is licensed under the XYZ License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Credits to anyone who helped
-* Anyone whose code was used
-* Inspiration
-* etc
+* Papa Johns for Keeping us going
