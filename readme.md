@@ -56,6 +56,7 @@ npm install angular
 #### Ionic
 ```
 npm install -g ionic
+ionic info
 ```
 
 ### Sensors
