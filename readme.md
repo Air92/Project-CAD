@@ -10,8 +10,23 @@ These instructions will get you a copy of the project up and running on your Ras
 
 What things you need to install, the hardware you need to configure and how to install them.
 
+Installing Node
+
+Download Node from https://nodejs.org/en/download/ for you OS
+Test Node
 ```
-Give examples
+node --version
+```
+
+Install Cordova 
+```
+npm install -g cordova
+cordova --version
+```
+
+Install Angular
+```
+npm install angular
 ```
 
 ### Installing
