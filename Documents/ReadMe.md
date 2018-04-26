@@ -15,11 +15,11 @@
  ## Application 
  
 
-  <p align="left">
+  <p style="display:inline">
 <img  src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/IMG-20180418-WA0001.jpg" width="300" height="534"/>
  </p>
 
-  <p align="right">
+  <p style="display:inline">
 <img src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/IMG-20180418-WA0002.jpg"  width="300" height="534"/>
  </p>
 
