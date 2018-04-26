@@ -145,7 +145,7 @@ The application will automatically connect to the Raspberry Pi and poll for sens
 ---
 
 #### Running Particle Sensor
-
+Attach the Particle Sensor corresponding to the diagram below.
 
 ---
 
@@ -156,7 +156,6 @@ The application will automatically connect to the Raspberry Pi and poll for sens
 
 
 ## Authors
-
 * **Abd-Assamad Achouri** - *Project manager* - [Achouri12](https://github.com/Achouri12)
 * **Yusof Bandar** - *Technical lead* - [YusofBandar](https://github.com/YusofBandar)
 * **Evans Mensah Adeenu** - *Team member* - [emAdeenu](https://github.com/emAdeenu)
