@@ -105,13 +105,19 @@ First you have to create a Apple Provisioning Profile
 * Click the play button in Xcode to try to run your app
 
 ### Sensors
-Before running the sensors the code needs to be configured.
 
+#### Bluetooth
+Before running the sensors bluetooth needs to be configured.First [**bleno**](https://github.com/noble/bleno) needs to be installed
+
+#### Bleno
+```sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev```
+
+#### Client Configuration
 Navigate to [**bleclientV2.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Bluetooth/bleclientV2.js).
 
-Find line 20 ```var pythonProcess = spawn ("python",[PATH_TO_BLUELED]);``` and change ```PATH_TO_BLUELED``` to the absolute path to [**blueLED.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/blueLED.py)
+```var pythonProcess = spawn ("python",[PATH_TO_BLUELED]);``` change ```PATH_TO_BLUELED``` to the absolute path of[**blueLED.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/blueLED.py)
 
-Find Line 55 ```var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);``` and change ```PATH_TO_SENSOR_DATA``` to the absolute path to [**SensorData.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorData.py)
+```var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);``` and change ```PATH_TO_SENSOR_DATA``` to the absolute path of [**SensorData.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorData.py)
 
 ## Built With
 
