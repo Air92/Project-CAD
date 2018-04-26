@@ -1,6 +1,6 @@
 
 <p align="right">
-<img align="right" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/Logo.PNG" width="179" height="106"/>
+<img align="right" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/Logo.PNG" width="170" height="100"/>
  </p>
 
 # Air92
