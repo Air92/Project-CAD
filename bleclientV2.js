@@ -17,7 +17,7 @@ bleno.on('advertisingStart', function(error){
     if(error){
       // error on advertise start
     }else{
-      var pythonProcess = spawn ("python",["/home/pi/Desktop/AIR92/PythonScript/blueLED.py"]);
+      var pythonProcess = spawn ("python",[PATH_TO_BLUELED]);
       console.log('ADVERTISING START');
       bleno.setServices([
         new bleno.PrimaryService({
@@ -52,7 +52,7 @@ function sensorData()
 			
 		
 	
-		var pythonProcess = spawn ("python",["PythonScript/SensorData.py"]);
+		var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);
 		pythonProcess.stdout.on("data", function (data)
 		{
 			//console.log(String.fromCharCode.apply(null,new Uint8Array(data)));
