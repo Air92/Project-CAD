@@ -130,9 +130,9 @@ Before running the sensors bluetooth needs to be configured. First [**bleno**](h
 #### Bluetooth Client Configuration
 Navigate to [**bleclientV2.js**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Bluetooth/bleclientV2.js) find line 20 and 55.
 
-```var pythonProcess = spawn ("python",[PATH_TO_BLUELED]);``` change ```PATH_TO_BLUELED``` to the absolute path of [**blueLED.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/blueLED.py)
+```var pythonProcess = spawn ("python",[PATH_TO_BLUELED]);``` change ```PATH_TO_BLUELED``` to the absolute path of [blueLED.py](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/blueLED.py)
 
-```var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);``` and change ```PATH_TO_SENSOR_DATA``` to the absolute path of [**SensorData.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorData.py)
+```var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);``` and change ```PATH_TO_SENSOR_DATA``` to the absolute path of [SensorData.py](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorData.py)
 
 ---
 
