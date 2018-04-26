@@ -90,6 +90,8 @@ Connect android phone to Computer and [***Enable Debugging***](https://www.embar
  
 Then run ```ionic cordova run android --device```
 
+---
+
 #### IOS
 First you have to create a Apple Provisioning Profile
 
