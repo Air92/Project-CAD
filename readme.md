@@ -104,6 +104,8 @@ First you have to create a Apple Provisioning Profile
 * Connect your phone via USB and select it as the run target
 * Click the play button in Xcode to try to run your app
 
+---
+
 ### Sensors
 
 #### Bluetooth
