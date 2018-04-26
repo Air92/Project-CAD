@@ -146,8 +146,8 @@ The application will automatically connect to the Raspberry Pi and poll for sens
 
 ---
 
-#### Running Particle Sensor
-Attach the Particle Sensor corresponding to the diagram below.
+#### Running Particulate Sensor
+Attach the Particulate Sensor corresponding to the diagram below.
 
 <p align="center">
 <img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/ParticleSensorLayout.PNG"  />
