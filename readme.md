@@ -177,7 +177,7 @@ See also the list of [contributors](https://github.com/Air92/Project-CAD/contrib
 
 ## License
 
-This project is licensed under the XYZ License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Air92/Project-CAD/blob/master/Documents/Licence.md) file for details
 
 ## Acknowledgments
 
