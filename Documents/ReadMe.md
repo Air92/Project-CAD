@@ -14,15 +14,12 @@
  
  ## Application 
  
-
-  <p style="float:left">
-<img  src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/IMG-20180418-WA0001.jpg" width="300" height="534"/>
+<p align="center">
+<img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/JourneyScreens.PNG"/>
  </p>
-
-  <p>
-<img src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/IMG-20180418-WA0002.jpg"  width="300" height="534"/>
- </p>
-
+ 
+ ***Journey Screen***, *each cloud indicates when a sensor reading was taken*
+ 
 ## Sensors
 
  <p align="center">
