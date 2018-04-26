@@ -23,7 +23,7 @@
 ## Sensors
 
  <p align="center">
-<img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/20180418_152151.jpg"/>
+<img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/SensorLayout.PNG"/>
  </p>
 
 *Raspberry Pi 3 with all sensors connected*
