@@ -151,6 +151,11 @@ Attach the Particle Sensor corresponding to the diagram below.
 <img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/ParticleSensorLayout.PNG"  />
  </p>
 
+Navigate to [**serialV2.py**](https://github.com/Air92/Project-CAD/tree/master/src/Raspberry%20Pi/Particle%20Sensor)
+
+```
+sudo python serialV2.py
+```
 
 ---
 
