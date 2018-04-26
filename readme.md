@@ -64,7 +64,7 @@ ionic info
 ### Sensors
 First install the latest version of [**Rasbian OS**](https://www.raspberrypi.org/documentation/installation/installing-images/) onto the Raspberry Pi.
 
-Once Rasbian is installed [**Grove Drivers**]() need to be installed.
+Once Rasbian is installed [**Grove Drivers**](https://www.dexterindustries.com/GrovePi/get-started-with-the-grovepi/) need to be installed.
 
 #### Grove Drivers
 ```
@@ -105,6 +105,13 @@ First you have to create a Apple Provisioning Profile
 * Click the play button in Xcode to try to run your app
 
 ### Sensors
+Before running the sensors the code needs to be configured.
+
+Navigate to [**bleclientV2.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Bluetooth/bleclientV2.js).
+
+Find line 20 ```var pythonProcess = spawn ("python",[PATH_TO_BLUELED]);``` and change ```PATH_TO_BLUELED``` to the absolute path to [**blueLED.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/blueLED.py)
+
+Find Line 55 ```var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);``` and change ```PATH_TO_SENSOR_DATA``` to the absolute path to [**SensorData.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorData.py)
 
 ## Built With
 
