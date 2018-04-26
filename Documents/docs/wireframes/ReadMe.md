@@ -1,4 +1,4 @@
-##WIREFRAMES
+## WIREFRAMES
 
 
 This is a link to our wireframes board on Trello. https://trello.com/b/8ng6RKMu/wireframes
