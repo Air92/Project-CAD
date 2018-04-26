@@ -142,6 +142,13 @@ sudo node bleclientV2.js
 
 The application will automatically connect to the Raspberry Pi and poll for sensor data.
 
+---
+
+#### Running Particle Sensor
+
+
+---
+
 ## Built With
 
 * [Ionic](https://ionicframework.com/)
