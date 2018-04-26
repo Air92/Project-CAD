@@ -17,7 +17,7 @@ The project is to allow people to see how much pollution people are come into co
 
 These instructions will get you a copy of the project up and running on your Raspberry Pi, phone and backend for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-```src``` contains the code needed for the Application and Raspberry Pi.
+```src``` contains the code needed for the [**Application**](https://github.com/Air92/Project-CAD/tree/master/src/Air92%20App/Version%200/Air92) and [**Raspberry Pi**](https://github.com/Air92/Project-CAD/tree/master/src/Air92%20App/Version%200/Air92)
 
 ```Documents``` contains records of the production process
 
