@@ -12,7 +12,7 @@
  
  ## Application 
  
- <p align="center">
+ <p align="center" height="100" width="100">
  </p>
  
  <p align="left">
