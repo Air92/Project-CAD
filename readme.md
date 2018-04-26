@@ -1,5 +1,9 @@
 # Air92
 
+<p align="right">
+<img align="right" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/Logo.PNG" />
+ </p>
+
 The project is to allow people to see how much pollution people are come into contact with their daily commutes to and from work or other journeys. The reasoning behind this project to is ensure people are aware of the effects of pollution as people don't pay as much attention to negative effects. 
 
 
