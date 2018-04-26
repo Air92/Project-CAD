@@ -119,6 +119,8 @@ Navigate to [**bleclientV2.py**](https://github.com/Air92/Project-CAD/blob/maste
 
 ```var pythonProcess = spawn ("python",[PATH_TO_SENSOR_DATA]);``` and change ```PATH_TO_SENSOR_DATA``` to the absolute path of [**SensorData.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorData.py)
 
+---
+
 #### Testing Sensors
 Navigate to [**SensorTest.py**](https://github.com/Air92/Project-CAD/blob/master/src/Raspberry%20Pi/Sensors/SensorTest.py).
 
@@ -127,7 +129,9 @@ sudo python SensorTest.py
 reboot
 ```
 
-No error should show
+No errors should show
+
+---
 
 ## Built With
 
