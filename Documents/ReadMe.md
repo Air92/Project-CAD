@@ -34,7 +34,7 @@
  ***New Journey Screen*** *User can create a new journey inputting start and end locations. Orange ***Get Location*** button converts your location co-ordinates to written location and inputs as your start location. 
  
  <p align="center">
-<img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/JourneyScreens.PNG"/>
+<img align="middle" src="https://github.com/Air92/Project-CAD/blob/master/Documents/Air92%20Images/ActiveJourney.PNG"/>
  </p>
  
  ***Active Journey Screen*** *From the ***Journey List Screen*** user can start a Journey. Each cloud indicates when the appilcation polls for sensor data via Bluetooth Lite.
