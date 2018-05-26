@@ -181,7 +181,7 @@ sudo python serialV2.py
 
 
 ## Authors
-* **Abd-Assamad Achouri** - *Project manager* - [Achouri12](https://github.com/Achouri12)
+* **Abd-Assamad Achouri** - *Project manager* - [Achouri12](https://github.com/Abd-AssamadAchouri)
 * **Yusof Bandar** - *Technical lead* - [YusofBandar](https://github.com/YusofBandar)
 * **Evans Mensah Adeenu** - *Team member* - [emAdeenu](https://github.com/emAdeenu)
 * **Naim Ahmed** - *Team member* - [NaimAhmed](https://github.com/NaimAhmed)
